@@ -12,23 +12,6 @@ git clone https://github.com/tu-usuario/quiz-maker.git
 cd quiz-maker
 ```
 
-## ⚠️ Requisitos previos
-
-- Node.js **v18.18.0** o superior (recomendado v20+)
-- npm (incluido con Node.js)
-
-Puedes comprobar tu versión de Node.js con:
-```bash
-node -v
-```
-
-## 🛠️ Uso del dev
-```shell
-cd src
-npm install
-npm run dev
-```
-
 ## 🆕 Crear o añadir mis propias preguntas
 - Puedes añadir tus preguntas en formato JSON o TXT, pero **debes seguir el formato correcto** (ver [Formato de preguntas](data\README.md)).
 - Cada archivo puede contener varias preguntas, y puedes crear tantos archivos como quieras.
@@ -50,6 +33,7 @@ Si deseas contribuir al proyecto, puedes hacerlo de varias maneras:
 - **Mejorando el código**: Si encuentras errores o tienes ideas para mejorar el código, no dudes en abrir un issue o enviar un pull request.
 - **Reportando errores**: Si encuentras algún error o problema, por favor, abre un issue en el repositorio para que podamos solucionarlo.
 - **Sugerencias**: Si tienes alguna sugerencia o idea para mejorar el proyecto, no dudes en abrir un issue o enviarnos un correo electrónico.
+- **Desarrollo en `feature/react-tailwindcss`**: Si deseas contribuir al desarrollo de la nueva interfaz de usuario con React y Tailwind CSS, puedes unirte a la rama `feature/react-tailwindcss`.
 
 ## 📄 Licencia
 Este proyecto está bajo la Licencia MIT. Puedes ver el archivo [LICENSE](LICENSE) para más detalles.
