@@ -1,0 +1,112 @@
+{
+    "questions": [
+        {
+            "question": "¿Quién es conocido como el 'Rey del Pop'?",
+            "options": ["Elvis Presley", "Michael Jackson", "Prince", "Freddie Mercury"],
+            "answer": 1,
+            "points": 2
+        },
+        {
+            "question": "¿Qué banda británica lanzó el álbum 'Abbey Road'?",
+            "options": ["The Rolling Stones", "The Beatles", "Queen", "Pink Floyd"],
+            "answer": 1
+        },
+        {
+            "question": "¿Cuál es el nombre real de la cantante Lady Gaga?",
+            "options": ["Stefani Germanotta", "Alicia Keys", "Robyn Fenty", "Adele Adkins"],
+            "answer": 0
+        },
+        {
+            "question": "¿Qué compositor es famoso por su Novena Sinfonía?",
+            "options": ["Mozart", "Beethoven", "Bach", "Chopin"],
+            "answer": 1
+        },
+        {
+            "question": "¿Quién canta la canción 'Shape of You'?",
+            "options": ["Ed Sheeran", "Justin Bieber", "Shawn Mendes", "Sam Smith"],
+            "answer": 0
+        },
+        {
+            "question": "¿En qué país nació el reggaetón?",
+            "options": ["Puerto Rico", "Colombia", "Cuba", "México"],
+            "answer": 0
+        },
+        {
+            "question": "¿Cuál es el nombre del álbum debut de Rosalía?",
+            "options": ["El Mal Querer", "Los Ángeles", "Motomami", "F*cking Money Man"],
+            "answer": 1
+        },
+        {
+            "question": "¿Qué instrumento toca Yo-Yo Ma?",
+            "options": ["Violín", "Piano", "Violonchelo", "Guitarra"],
+            "answer": 2
+        },
+        {
+            "question": "¿Quién es el líder de la banda U2?",
+            "options": ["Bono", "The Edge", "Adam Clayton", "Larry Mullen Jr."],
+            "answer": 0
+        },
+        {
+            "question": "¿Qué artista popularizó el 'moonwalk'?",
+            "options": ["James Brown", "Michael Jackson", "Usher", "Chris Brown"],
+            "answer": 1
+        },
+        {
+            "question": "¿Cuál es el género musical de AC/DC?",
+            "options": ["Pop", "Rock", "Jazz", "Reggae"],
+            "answer": 1
+        },
+        {
+            "question": "¿Qué cantante española ganó Eurovisión en 1968?",
+            "options": ["Rocío Jurado", "Massiel", "Lola Flores", "Isabel Pantoja"],
+            "answer": 1,
+            "points": 2
+        },
+        {
+            "question": "¿Quién compuso 'Bohemian Rhapsody'?",
+            "options": ["Brian May", "Freddie Mercury", "Roger Taylor", "John Deacon"],
+            "answer": 1
+        },
+        {
+            "question": "¿Qué rapero lanzó el álbum 'DAMN.' en 2017?",
+            "options": ["Drake", "Kendrick Lamar", "J. Cole", "Kanye West"],
+            "answer": 1
+        },
+        {
+            "question": "¿Cuál es el nombre artístico de Abel Tesfaye?",
+            "options": ["The Weeknd", "Drake", "Post Malone", "Frank Ocean"],
+            "answer": 0
+        },
+        {
+            "question": "¿Qué grupo español canta 'La Flaca'?",
+            "options": ["Estopa", "Jarabe de Palo", "El Canto del Loco", "La Oreja de Van Gogh"],
+            "answer": 1
+        },
+        {
+            "question": "¿Quién es la voz principal de Coldplay?",
+            "options": ["Chris Martin", "Jonny Buckland", "Guy Berryman", "Will Champion"],
+            "answer": 0,
+            "points": 2
+        },
+        {
+            "question": "¿Qué cantante lanzó el álbum 'Future Nostalgia'?",
+            "options": ["Dua Lipa", "Ariana Grande", "Billie Eilish", "Taylor Swift"],
+            "answer": 0
+        },
+        {
+            "question": "¿En qué década surgió el movimiento grunge?",
+            "options": ["Años 60", "Años 70", "Años 80", "Años 90"],
+            "answer": 3
+        },
+        {
+            "question": "¿Qué compositor español es famoso por su obra 'Concierto de Aranjuez'?",
+            "options": ["Isaac Albéniz", "Enrique Granados", "Joaquín Rodrigo", "Manuel de Falla"],
+            "answer": 2
+        },
+        {
+            "question": "¿Quién interpreta la canción 'Bad Guy'?",
+            "options": ["Billie Eilish", "Lorde", "Halsey", "Selena Gomez"],
+            "answer": 0
+        }
+    ]
+}
