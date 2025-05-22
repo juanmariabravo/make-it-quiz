@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -26,6 +26,9 @@ export default function ExamModePage() {
   const [isLoading, setIsLoading] = useState(true)
   const [examDuration, setExamDuration] = useState(0)
 
+  // Usar un ref para rastrear si estamos cambiando de pregunta
+  const isChangingQuestion = useRef(false)
+
   useEffect(() => {
     async function fetchCategories() {
       try {
@@ -41,6 +44,14 @@ export default function ExamModePage() {
     fetchCategories()
   }, [])
 
+  // Efecto para limpiar la selección cuando cambia la pregunta actual
+  useEffect(() => {
+    if (isChangingQuestion.current) {
+      setSelectedOption(null)
+      isChangingQuestion.current = false
+    }
+  }, [gameState.currentQuestion])
+
   const startQuiz = (category: QuizCategory) => {
     // Calcular duración del examen: 30 segundos por pregunta
     const duration = category.questions.length * 30
@@ -53,7 +64,7 @@ export default function ExamModePage() {
       timeRemaining: duration,
       isFinished: false,
     })
-
+    setSelectedOption(null)
     setExamDuration(duration)
   }
 
@@ -67,60 +78,72 @@ export default function ExamModePage() {
     const newAnswers = [...gameState.answers]
     newAnswers[gameState.currentQuestion] = selectedOption
 
-    setGameState({
-      ...gameState,
+    const nextQuestion = gameState.currentQuestion + 1
+    const isLastQuestion = nextQuestion >= selectedCategory.questions.length
+
+    // Marcar que estamos cambiando de pregunta
+    isChangingQuestion.current = !isLastQuestion
+
+    // Actualizar el estado del juego
+    setGameState((prevState) => ({
+      ...prevState,
       answers: newAnswers,
-    })
+      currentQuestion: isLastQuestion ? prevState.currentQuestion : nextQuestion,
+    }))
 
-    // Avanzar automáticamente a la siguiente pregunta
-    nextQuestion()
-  }
-
-  const nextQuestion = () => {
-    if (!selectedCategory) return
-
-    const nextIndex = gameState.currentQuestion + 1
-
-    if (nextIndex >= selectedCategory.questions.length) {
-      finishExam()
-    } else {
-      setGameState({
-        ...gameState,
-        currentQuestion: nextIndex,
-      })
-      setSelectedOption(null)
+    // Si es la última pregunta, finalizar el examen
+    if (isLastQuestion) {
+      finishExam(newAnswers)
     }
   }
 
   const prevQuestion = () => {
     if (!selectedCategory || gameState.currentQuestion <= 0) return
 
+    const prevIndex = gameState.currentQuestion - 1
+    const prevAnswer = gameState.answers[prevIndex]
+
+    // Marcar que estamos cambiando de pregunta
+    isChangingQuestion.current = true
+
     setGameState({
       ...gameState,
-      currentQuestion: gameState.currentQuestion - 1,
+      currentQuestion: prevIndex,
     })
 
-    setSelectedOption(gameState.answers[gameState.currentQuestion - 1])
+    // Cargar la respuesta anterior si existe (después del cambio de pregunta)
+    setTimeout(() => {
+      if (prevAnswer !== -1) {
+        setSelectedOption(prevAnswer)
+      }
+    }, 0)
   }
 
-  const finishExam = useCallback(() => {
-    if (!selectedCategory) return
+  const finishExam = useCallback(
+    (finalAnswers = gameState.answers) => {
+      if (!selectedCategory) return
 
-    // Calcular puntuación
-    let totalScore = 0
-    gameState.answers.forEach((answer, index) => {
-      if (answer === selectedCategory.questions[index].answer) {
-        totalScore += selectedCategory.questions[index].points || 1
-      }
-    })
+      // Calcular puntuación usando las respuestas proporcionadas
+      let totalScore = 0
+      let correctAnswers = 0
 
-    setGameState({
-      ...gameState,
-      score: totalScore,
-      isFinished: true,
-      timeRemaining: 0,
-    })
-  }, [gameState, selectedCategory])
+      finalAnswers.forEach((answer, index) => {
+        if (answer !== -1 && answer === selectedCategory.questions[index].answer) {
+          totalScore += selectedCategory.questions[index].points || 1
+          correctAnswers++
+        }
+      })
+
+      setGameState((prev) => ({
+        ...prev,
+        answers: finalAnswers,
+        score: totalScore,
+        isFinished: true,
+        timeRemaining: 0,
+      }))
+    },
+    [selectedCategory, gameState.answers],
+  )
 
   const restartQuiz = () => {
     if (!selectedCategory) return
@@ -230,9 +253,17 @@ export default function ExamModePage() {
   }
 
   if (gameState.isFinished) {
-    const totalQuestions = selectedCategory.questions.length
-    const totalPoints = selectedCategory.questions.reduce((sum, q) => sum + (q.points || 1), 0)
-    const percentageScore = Math.round((gameState.score / totalPoints) * 100)
+    const correctAnswers = gameState.answers.filter((a, i) => a === selectedCategory.questions[i].answer).length
+    const incorrectAnswers = gameState.answers.filter(
+      (a, i) => a !== -1 && a !== selectedCategory.questions[i].answer,
+    ).length
+    const answeredQuestions = correctAnswers + incorrectAnswers
+
+    // Calcular el total de puntos de las preguntas respondidas correctamente
+    const maxPossibleScore = correctAnswers > 0 ? correctAnswers : selectedCategory.questions.length // Si no hay respuestas correctas, usar el total de preguntas
+
+    const percentageScore = maxPossibleScore > 0 ? Math.round((gameState.score / maxPossibleScore) * 100) : 0
+
     const isPassed = percentageScore >= 60 // 60% para aprobar
 
     return (
@@ -246,7 +277,7 @@ export default function ExamModePage() {
               <div className="flex flex-col items-center justify-center p-6 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
                 <h3 className="text-xl font-semibold mb-2">Tu calificación</h3>
                 <div className="text-4xl font-bold text-orange-600">
-                  {gameState.score} / {totalPoints}
+                  {gameState.score} / {maxPossibleScore}
                 </div>
                 <div className="mt-2 text-lg">{percentageScore}%</div>
 
@@ -264,15 +295,11 @@ export default function ExamModePage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg text-center">
-                  <div className="text-xl font-semibold text-green-600">
-                    {gameState.answers.filter((a, i) => a === selectedCategory.questions[i].answer).length}
-                  </div>
+                  <div className="text-xl font-semibold text-green-600">{correctAnswers}</div>
                   <div className="text-sm text-muted-foreground">Correctas</div>
                 </div>
                 <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg text-center">
-                  <div className="text-xl font-semibold text-red-600">
-                    {gameState.answers.filter((a, i) => a !== -1 && a !== selectedCategory.questions[i].answer).length}
-                  </div>
+                  <div className="text-xl font-semibold text-red-600">{incorrectAnswers}</div>
                   <div className="text-sm text-muted-foreground">Incorrectas</div>
                 </div>
               </div>
@@ -366,8 +393,8 @@ export default function ExamModePage() {
               disabled={selectedOption === null}
               className="bg-orange-600 hover:bg-orange-700"
             >
-              {gameState.currentQuestion === totalQuestions - 1 ? "Finalizar" : "Siguiente"}
-              {gameState.currentQuestion !== totalQuestions - 1 && <ArrowRight className="h-4 w-4 ml-2" />}
+              {gameState.currentQuestion >= totalQuestions - 1 ? "Finalizar" : "Siguiente"}
+              {gameState.currentQuestion < totalQuestions - 1 && <ArrowRight className="h-4 w-4 ml-2" />}
             </Button>
           </CardFooter>
         </Card>
@@ -379,7 +406,7 @@ export default function ExamModePage() {
           <Button
             variant="outline"
             size="sm"
-            onClick={finishExam}
+            onClick={() => finishExam()}
             className="text-orange-600 border-orange-600 hover:bg-orange-50"
           >
             Terminar examen
