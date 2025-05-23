@@ -2,43 +2,43 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Modo Estudio - Make It Quiz</title>
-  <link rel="stylesheet" href="styles/study-mode.css">
+  <title>Modo Examen - Make It Quiz</title>
+  <link rel="stylesheet" href="styles/exam-mode.css">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/modes.css">
 </head>
 <body>
-  <header class="header">
-    <a href="index.html" class="logo">make-it-quiz</a>
-    <nav class="nav">
-      <a href="index.html">Inicio</a>
-      <a href="index.html#modes">Jugar</a>
-      <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
-    </nav>
-  </header>
-  <br>
-  <br>
-  <br>
-  <br>
+<header class="header">
+  <a href="index.html" class="logo">make-it-quiz</a>
+  <nav class="nav">
+    <a href="index.html">Inicio</a>
+    <a href="index.html#modes">Jugar</a>
+    <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+  </nav>
+</header>
+<br>
+<br>
+<br>
+<br>
   <div class="container">
-    <h1>Modo Estudio</h1>
+    <h1>Modo Examen</h1>
     <div id="category-select">
       <label for="category">Elige una categoría:</label>
       <select id="category"></select>
-      <button id="load-category">Cargar</button>
+      <button id="load-category">Comenzar examen</button>
     </div>
-    <div id="study-area" style="display:none;">
+    <div id="exam-area" style="display:none;">
+      <div id="timer" style="text-align:right;font-size:1.2em;margin-bottom:10px;"></div>
       <div id="question-box">
         <div id="question-text"></div>
         <div id="options"></div>
-        <button id="show-answer" style="display:none;">Mostrar solución</button>
-        <div id="answer-feedback"></div>
         <button id="next-question" style="display:none;">Siguiente</button>
       </div>
       <div id="progress"></div>
     </div>
+    <div id="exam-result" style="display:none;"></div>
   </div>
-  <script src="scripts/study-mode.js"></script>
+  <script src="scripts/exam-mode.js"></script>
   <script src="scripts/app.js"></script>
   <script src="scripts/game-modes.js"></script>
   <script src="scripts/quiz-data.js"></script>

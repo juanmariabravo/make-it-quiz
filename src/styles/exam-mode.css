@@ -1,0 +1,35 @@
+/* exam-mode.css */
+@import url('study-mode.css');
+
+.option-btn.correct {
+  background: #d4f8e1 !important;
+  border-color: #3bb273 !important;
+  color: #217a47;
+}
+.option-btn.incorrect {
+  background: #ffe0e0 !important;
+  border-color: #e74c3c !important;
+  color: #a94442;
+}
+.option-btn.selected {
+  box-shadow: 0 0 0 2px #9966ff;
+}
+#exam-result {
+  margin-top: 32px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(153,102,255,0.08);
+  padding: 24px 20px;
+}
+#timer {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.container {
+  max-width: 480px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(153, 102, 255, 0.08);
+  padding: 24px 20px;
+}

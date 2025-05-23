@@ -86,7 +86,7 @@ body.dark {
     font-size: 4rem;
     font-weight: bold;
     color: #9966ff;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -115,7 +115,7 @@ body.dark {
 
 .features h2 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     color: #333;
     font-size: 1.1rem;
     font-weight: 400;
@@ -171,7 +171,7 @@ body.dark {
     display: flex;
     gap: 20px;
     justify-content: center;
-    margin: 40px 0;
+    margin: 20px 0;
 }
 
 .btn {
@@ -211,7 +211,7 @@ body.dark {
 
 .footer {
     text-align: center;
-    padding: 40px 0;
+    padding: 30px 0;
     opacity: 0.7;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
