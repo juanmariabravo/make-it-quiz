@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>make-it-quiz</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/modes.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing" class="page">
+        <div class="container">
+            <header class="header">
+                <a href="#" class="logo">make-it-quiz</a>
+                <nav class="nav">
+                    <a href="#" onclick="showSection('landing')">Inicio</a>
+                    <a href="#" onclick="showSection('modes')">Jugar</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+                </nav>
+            </header>
+
+            <div class="hero">
+                <h1>make-it-quiz</h1>
+                <p>Tus preguntas, tu juego</p>
+            </div>
+
+            <div class="features">
+                <h2>Herramienta para crear y jugar tests interactivos <strong>personalizados</strong> con múltiples modos de juego.</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📝</div>
+                        <h3>Personalizable</h3>
+                        <p>Añade tus propias preguntas en TXT/JSON</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3>Múltiples modos</h3>
+                        <p>Estudio, Examen, Kahoot, CLI</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="showSection('modes')">¡Jugar ahora!</button>
+                <a href="https://github.com/juanmariabravo/make-it-quiz" class="btn btn-secondary">🔗 Ver código</a>
+            </div>
+
+            <footer class="footer">
+                <p>© 2025 make-it-quiz. Todos los derechos reservados.</p>
+                <p>Desarrollado por Juan María Bravo López</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Game Modes Selection -->
+    <div id="modes" class="page hidden">
+        <div class="container">
+            <header class="header">
+                <a href="#" class="logo">make-it-quiz</a>
+                <nav class="nav">
+                    <a href="#" onclick="showSection('landing')">Inicio</a>
+                    <a href="#" onclick="showSection('modes')">Jugar</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+                </nav>
+            </header>
+
+            <div class="modes-container">
+                <a href="#" class="back-link" onclick="showSection('landing')">← Volver al inicio</a>
+                
+                <div class="modes-header">
+                    <h1>Elige un modo de juego</h1>
+                    <p>Selecciona cómo quieres jugar con tus preguntas personalizadas</p>
+                </div>
+
+                <div class="modes-grid">
+                    <div class="mode-card" onclick="window.location.href='study-mode.html'">
+                        <div class="mode-icon">📖</div>
+                        <h3>Modo Estudio</h3>
+                        <p>Estudia a tu ritmo y comprueba tus respuestas</p>
+                        <div class="mode-details">
+                            Sin límite de tiempo • Respuestas inmediatas
+                        </div>
+                    </div>
+
+                    <div class="mode-card" onclick="startGame('exam')">
+                        <div class="mode-icon">⏰</div>
+                        <h3>Modo Examen</h3>
+                        <p>Contrarreloj: responde antes de que acabe el tiempo</p>
+                        <div class="mode-details">
+                            Tiempo limitado • Puntuación final
+                        </div>
+                    </div>
+
+                    <div class="mode-card" onclick="startGame('kahoot')">
+                        <div class="mode-icon">🏆</div>
+                        <h3>Modo Kahoot</h3>
+                        <p>Compite con amigos por puntos en tiempo real</p>
+                        <div class="mode-details">
+                            Multijugador • Tiempo limitado • Ranking
+                        </div>
+                    </div>
+
+                    <div class="mode-card" onclick="startCLI()">
+                        <div class="mode-icon">💻</div>
+                        <h3>Modo CLI</h3>
+                        <p>Experiencia en línea de comandos para los más técnicos</p>
+                        <div class="mode-details">
+                            Terminal interactivo • Para desarrolladores
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CLI Mode -->
+    <div id="cli" class="page hidden">
+        <div class="container">
+            <header class="header">
+                <a href="#" class="logo">make-it-quiz</a>
+                <nav class="nav">
+                    <a href="#" onclick="showSection('landing')">Inicio</a>
+                    <a href="#" onclick="showSection('modes')">Jugar</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+                </nav>
+            </header>
+
+            <div class="quiz-container">
+                <a href="#" class="back-link" onclick="showSection('modes')">← Salir del CLI</a>
+                
+                <div class="quiz-progress">
+                    <span>Programación • Modo CLI</span>
+                </div>
+
+                <div style="background: #1a1a1a; border-radius: 15px; padding: 20px; font-family: 'Courier New', monospace; color: #00ff00; margin: 20px 0;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; color: #ff6b6b;">
+                        <span style="width: 12px; height: 12px; background: #ff5f56; border-radius: 50%;"></span>
+                        <span style="width: 12px; height: 12px; background: #ffbd2e; border-radius: 50%;"></span>
+                        <span style="width: 12px; height: 12px; background: #27ca3f; border-radius: 50%;"></span>
+                        <span style="margin-left: 10px; color: #fff;">make-it-quiz-cli</span>
+                    </div>
+                    <div id="terminal-content">
+                        <div>$ make-it-quiz --mode=cli</div>
+                        <div style="margin: 10px 0; border: 1px solid #00ff00; padding: 10px;">
+                            <div>make-it-quiz CLI v1.0.0</div>
+                            <div>Modo terminal para los más técnicos</div>
+                        </div>
+                        <div>Cargando categoría: Programación...</div>
+                        <div>Encontradas 3 preguntas.</div>
+                        <div>Iniciando cuestionario...</div>
+                    </div>
+                    <div style="margin-top: 15px; color: #6c7b7f; font-size: 0.9rem;">
+                        Tip: Escribe "exit" o "salir" para salir del cuestionario
+                    </div>
+                    <div style="position: absolute; bottom: 10px; right: 20px; color: #9966ff; font-size: 0.9rem;">
+                        Programación
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Game -->
+    <div id="quiz" class="page hidden">
+        <div class="container">
+            <header class="header">
+                <a href="#" class="logo">make-it-quiz</a>
+                <nav class="nav">
+                    <a href="#" onclick="showSection('landing')">Inicio</a>
+                    <a href="#" onclick="showSection('modes')">Jugar</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+                </nav>
+            </header>
+
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <div>
+                        <a href="#" class="back-link" onclick="exitQuiz()">← Abandonar juego</a>
+                        <div class="quiz-progress">
+                            <span id="quiz-category">Conocimiento General</span>
+                            <span>•</span>
+                            <span id="question-counter">Pregunta 1 de 3</span>
+                            <span id="points-display" class="hidden">1 punto</span>
+                        </div>
+                    </div>
+                    <div class="timer hidden" id="timer">
+                        <span>⏰</span>
+                        <span id="time-left">30s</span>
+                    </div>
+                    <div id="player-count" class="hidden">
+                        <span>👥 4 jugadores</span>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 33%"></div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text" id="question-text">
+                        ¿Qué planeta es conocido como el planeta rojo?
+                    </div>
+                    <div class="answers-grid" id="answers-grid">
+                        <button class="answer-btn" onclick="selectAnswer(0)">Venus</button>
+                        <button class="answer-btn" onclick="selectAnswer(1)">Marte</button>
+                        <button class="answer-btn" onclick="selectAnswer(2)">Júpiter</button>
+                        <button class="answer-btn" onclick="selectAnswer(3)">Saturno</button>
+                    </div>
+                </div>
+
+                <div class="quiz-controls">
+                    <button class="btn btn-secondary" onclick="previousQuestion()" id="prev-btn">← Anterior</button>
+                    <button class="btn btn-secondary" onclick="exitQuiz()">Abandonar juego</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()" id="next-btn">Siguiente →</button>
+                    <button class="btn btn-primary hidden" onclick="finishQuiz()" id="finish-btn">Finalizar</button>
+                    <button class="btn btn-secondary hidden" onclick="endQuiz()" id="end-btn">Terminar examen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results" class="page hidden">
+        <div class="container">
+            <header class="header">
+                <a href="#" class="logo">make-it-quiz</a>
+                <nav class="nav">
+                    <a href="#" onclick="showSection('landing')">Inicio</a>
+                    <a href="#" onclick="showSection('modes')">Jugar</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+                </nav>
+            </header>
+
+            <div class="quiz-container">
+                <a href="#" class="back-link" onclick="showSection('modes')">← Salir del examen</a>
+
+                <div class="results-card">
+                    <h2 class="results-title">¡Examen completado!</h2>
+                    
+                    <div class="results-title">Tu calificación</div>
+                    <div class="score-display" id="final-score">4 / 3</div>
+                    <div class="score-percentage" id="score-percentage">133%</div>
+                    
+                    <div class="score-status passed">¡APROBADO!</div>
+
+                    <div class="score-breakdown">
+                        <div class="score-item correct">
+                            <h3 style="font-size: 2rem; margin-bottom: 10px;">3</h3>
+                            <p>Correctas</p>
+                        </div>
+                        <div class="score-item incorrect">
+                            <h3 style="font-size: 2rem; margin-bottom: 10px;">0</h3>
+                            <p>Incorrectas</p>
+                        </div>
+                    </div>
+
+                    <div style="margin: 30px 0; opacity: 0.8;">
+                        <p><strong>Tiempo utilizado</strong></p>
+                        <p>01:30 de 01:30</p>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <button class="btn btn-secondary" onclick="retryQuiz()">Reintentar</button>
+                        <button class="btn btn-primary" onclick="showSection('modes')">Volver a categorías</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/game-modes.js"></script>
+    <script src="scripts/quiz-data.js"></script>
+
+    </body>
+    </html>

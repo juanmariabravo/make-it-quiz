@@ -1,0 +1,217 @@
+/* main.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f6fa 100%);
+    min-height: 100vh;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+body.dark {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: inherit;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px; /* Aumenta el padding horizontal */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #9966ff;
+    text-decoration: none;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.nav a:hover {
+    opacity: 0.7;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: inherit;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.hero {
+    text-align: center;
+    margin: 60px 0;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #9966ff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin-bottom: 40px;
+}
+
+.features {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 10px 16px;      /* Antes: 20px */
+    margin: 10px 0;          /* Antes: 20px 0 */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(6px);
+    max-width: 600px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dark .features {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.dark .features h2 {
+    color: #fff;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Antes: 300px */
+    gap: 8px; /* Opcional: menos espacio entre tarjetas */
+    margin-top: 8px;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: rgba(153, 102, 255, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(153, 102, 255, 0.2);
+}
+
+.feature-icon {
+    font-size: 1.5rem;         /* Antes: 3rem */
+    margin-bottom: 10px;     /* Antes: 20px */
+}
+
+.feature-card h3 {
+    font-size: 1.1rem;       /* Antes: 1.5rem */
+    margin-bottom: 10px;     /* Antes: 15px */
+    color: #333;
+}
+
+.dark .feature-card h3 {
+    color: #fff;
+}
+
+.feature-card p {
+    font-size: 0.95rem;      /* Reduce el tamaño de fuente */
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #9966ff, #6644cc);
+    color: white;
+    box-shadow: 0 10px 30px rgba(153, 102, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(153, 102, 255, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: inherit;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.footer {
+    text-align: center;
+    padding: 40px 0;
+    opacity: 0.7;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}

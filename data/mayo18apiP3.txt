@@ -1,0 +1,139 @@
+Una aplicación para un teléfono inteligente almacena, de forma continua, en el sistema de archivos del teléfono la posición geográfica para su posterior recuperación por parte del usuario del teléfono. En este caso
+a) No es aplicable ni la LOPD ni la LSSI
+b) Es de aplicación exclusivamente la LSSI
+c) Es de aplicación la LOPD y la LSSI
+d) Es de aplicación exclusivamente la LOPD
+Solución: c)
+
+Quien desarrolla un programa de ordenador que realiza transacciones bancarias y en cada operación transfiere un céntimo de euro a una cuenta bancaria sin conocimiento del usuario
+a) Comete un delito de revelación de secretos
+b) Comete un delito de daños
+c) Comete un delito de estafa
+d) Comete un delito de falsedades
+Solución: c)
+
+Quien realiza un acceso a los datos de carácter personal por cuenta de terceros se denomina
+a) Responsable de seguridad
+b) Encargado de tratamiento
+c) Responsable del fichero
+d) Usuario de los datos
+Solución: b)
+
+En una aplicación que trate datos de carácter personal
+a) Sólo es obligatorio forzar al cambio de contraseñas, al menos, una vez al año si se tratan datos con medidas de seguridad de nivel medio o alto
+b) Siempre es necesario limitar el nº de intentos reiterados de acceso no autorizado
+c) No es posible utilizar cuentas genéricas de acceso a la aplicación para su uso por varias personas
+d) Siempre es necesario permitir la recuperación de contraseñas
+Solución: b)
+
+Las comunicaciones en una red deben estar cifradas cuando se transmitan datos de carácter personal relativos a
+a) Infracciones penales
+b) Creencias
+c) Personalidad o comportamiento
+d) Impuestos
+Solución: b)
+
+Un certificado electrónico
+a) Está firmado electrónicamente por el prestador de servicios de certificación y el propietario del certificado
+b) Permite comprobar la integridad del documento firmado con dicho certificado
+c) Sólo es necesario cuando se utiliza una pareja de claves (cifrado asimétrico) para generar la firma electrónica
+d) Está firmado electrónicamente por el prestador de servicios de certificación
+Solución: d)
+
+Las exigencias de la LSSI a la utilización de las cookies se exceptúan en el caso de
+a) Cookies persistentes
+b) Cookies propias
+c) Cookies anónimas
+d) Ninguna de las otras respuestas es correcta
+Solución: d)
+
+La tutela de derechos recogido en la LOPD
+a) La ejerce las Comunidades Autónomas a través de sus Consejerías de Justicia
+b) Sólo es posible a través de los Tribunales de Justicia
+c) La ejerce la Agencia Española de Protección de Datos
+d) La ejerce el Ministerio de Justicia
+Solución: c)
+
+Aunque no se tenga el consentimiento de la persona, se puede realizar una comunicación de datos de dicha persona a (elegir la respuesta incorrecta)
+a) Cualquier organización si los datos se recogieron de una fuente accesible al público
+b) Jueces y Tribunales
+c) A los padres de una persona mayor de edad
+d) A un hospital en caso de urgencia médica
+Solución: a)
+
+Una persona física crea un sitio web con publicidad sobre material fotográfico e incorpora fotografías propias para ilustrar el uso de ciertas técnicas fotográficas. Asimismo, se permite la descarga y el uso sin restricciones de dichas fotografías. En este caso
+a) Es de aplicación la LSSI si recogen datos personales de las personas que descargan fotografías
+b) Es de aplicación la LSSI
+c) No es de aplicación la LSSI pues es una persona física quien crea el sitio web
+d) No es de aplicación la LSSI pues son fotografías propias y tiene todos los derechos sobre dichas fotografías
+Solución: c)
+
+Un frigorífico conectado a Internet registra la entrada y salida de alimentos y, cuando procede, pide los alimentos necesarios a un supermercado para su envío al domicilio del propietario del frigorífico. En este caso
+a) Es de aplicación la LOPD y la LSSI
+b) No es aplicable ni la LOPD ni la LSSI
+c) Es de aplicación exclusivamente la LOPD
+d) Es de aplicación exclusivamente la LSSI
+Solución: a)
+
+Toda aplicación que trate datos de carácter personal debe incluir en su descripción técnica el nivel de medidas de seguridad que permite alcanzar dicho software excepto
+a) Ninguna de las otras respuestas es correcta
+b) Si los datos personales tratados son exclusivamente de personas de la empresa u organización usuaria de la aplicación
+c) Si el nivel es básico
+d) Si el nivel es básico o medio
+Solución: b)
+
+¿Quién puede realizar una auditoría según el Reglamento de la LOPD?
+a) El responsable de seguridad
+b) El encargado del tratamiento
+c) Las personas certificadas por la Agencia Española de Protección de Datos
+d) Ninguna de las otras respuestas es correcta
+Solución: c)
+
+Una empresa de desarrollo de software ha diseñado la estructura de una base de datos de legislación nacional para un equipo de abogados. En este caso, los derechos de autor son
+a) Por defecto, de la empresa de desarrollo de software y del equipo de abogados
+b) Terminan a los 15 años de la creación de la base de datos
+c) De los creadores de la estructura de la base de datos
+d) Del equipo de abogados
+Solución: c)
+
+¿Quién puede acceder al Registro General de Protección de Datos?
+a) Exclusivamente los responsables de ficheros y los responsables de seguridad
+b) Cualquier persona u organización
+c) Exclusivamente los interesados
+d) Exclusivamente los responsables de ficheros
+Solución: b)
+
+Un sitio web tiene la información de contacto de todas las empresas de fontanería y fontaneros que trabajan de forma autónoma en una provincia. Las medidas de seguridad a aplicar según el Reglamento de la LOPD son
+a) De nivel básico
+b) De nivel alto
+c) De nivel medio
+d) Ninguna pues no es de aplicación la LOPD
+Solución: a)
+
+¿Qué dato NO es especialmente protegido según la LOPD?
+a) Ideología
+b) Origen racial
+c) Datos financieros
+d) Afiliación sindical
+Solución: c)
+
+Una empresa trata datos de carácter personal siendo exigible un responsable de seguridad. En este caso
+a) Se tratan datos que requieren un nivel alto de medidas de seguridad
+b) El responsable del fichero ha delegado en el responsable de seguridad todas las tareas de gestión de esos datos personales
+c) Se están realizando transferencias internacionales de datos personales
+d) Se tratan datos que requieren un nivel medio o alto de medidas de seguridad
+Solución: d)
+
+¿Quién debe realizar la inscripción de un fichero en el Registro General de Protección de Datos?
+a) Todas las respuestas son correctas
+b) El encargado del tratamiento
+c) El responsable del tratamiento
+d) El responsable de seguridad
+Solución: c)
+
+Según la LOPD, NO es una fuente accesible al público
+a) Sitio web de la Junta de Comunidades de Castilla-La Mancha
+b) Guía telefónica de los abonados a un operador de telefonía fija
+c) Sitio web del periódico Lanza
+d) Diario Oficial de Castilla-La Mancha
+Solución: b)

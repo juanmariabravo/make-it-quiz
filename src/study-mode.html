@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Modo Estudio - Make It Quiz</title>
+  <link rel="stylesheet" href="styles/study-mode.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Modo Estudio</h1>
+    <div id="category-select">
+      <label for="category">Elige una categoría:</label>
+      <select id="category"></select>
+      <button id="load-category">Cargar</button>
+    </div>
+    <div id="study-area" style="display:none;">
+      <div id="question-box">
+        <div id="question-text"></div>
+        <div id="options"></div>
+        <button id="show-answer" style="display:none;">Mostrar solución</button>
+        <div id="answer-feedback"></div>
+        <button id="next-question" style="display:none;">Siguiente</button>
+      </div>
+      <div id="progress"></div>
+    </div>
+  </div>
+  <script src="scripts/study-mode.js"></script>
+</body>
+</html>
