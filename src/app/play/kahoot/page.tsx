@@ -104,13 +104,11 @@ export default function KahootModePage() {
     setTimeout(() => {
       const updatedAnswers = { ...selectedAnswers, 0: optionIndex }
 
-      players.forEach((player, index) => {
-        if (index === 0) return // Saltar al jugador real
-
-        const randomDelay = Math.random() * 5000 // Respuesta en 0-5 segundos
+      // Usa el número de jugadores simulados (por ejemplo, 3)
+      for (let simIndex = 1; simIndex < players.length; simIndex++) {
+        const randomDelay = Math.random() * 3000 // Respuesta en 0-3 segundos
 
         setTimeout(() => {
-          // 70% de probabilidad de respuesta correcta para simular competencia
           const correctAnswer = selectedCategory.questions[gameState.currentQuestion].answer
           const willAnswerCorrectly = Math.random() < 0.7
           const playerAnswer = willAnswerCorrectly ? correctAnswer : Math.floor(Math.random() * 4)
@@ -120,16 +118,18 @@ export default function KahootModePage() {
 
           setPlayers((prev) => {
             const updated = [...prev]
-            updated[index].score += playerPoints
+            if (updated[simIndex]) {
+              updated[simIndex].score += playerPoints
+            }
             return updated
           })
 
           setSelectedAnswers((prev) => ({
             ...prev,
-            [index]: playerAnswer,
+            [simIndex]: playerAnswer,
           }))
         }, randomDelay)
-      })
+      }
     }, 500)
   }
 
