@@ -56,8 +56,9 @@ export const sampleCategories: QuizCategory[] = [
 
 // Función para cargar datos de preguntas (simulada)
 export async function loadQuizCategories(): Promise<QuizCategory[]> {
-  // En una implementación real, esto cargaría datos de archivos o una API
-  return sampleCategories
+  const response = await fetch('/quizzes.json')
+  if (!response.ok) throw new Error('Failed to load quizzes')
+  return await response.json()
 }
 
 // Función para parsear preguntas desde formato TXT

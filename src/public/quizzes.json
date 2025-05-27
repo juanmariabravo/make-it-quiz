@@ -1,0 +1,774 @@
+[
+  {
+    "id": "culturageneral",
+    "name": "culturageneral",
+    "questions": [
+      {
+        "question": "¿Cuál es la capital de Francia?",
+        "options": [
+          "París",
+          "Londres",
+          "Berlín",
+          "Madrid"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿Quién pintó la Mona Lisa?",
+        "options": [
+          "Leonardo da Vinci",
+          "Pablo Picasso",
+          "Vincent van Gogh",
+          "Claude Monet"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿En qué continente se encuentra Egipto?",
+        "options": [
+          "Asia",
+          "África",
+          "Europa",
+          "Oceanía"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es el río más largo del mundo?",
+        "options": [
+          "Amazonas",
+          "Nilo",
+          "Yangtsé",
+          "Misisipi"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Quién escribió \"Cien años de soledad\"?",
+        "options": [
+          "Mario Vargas Llosa",
+          "Gabriel García Márquez",
+          "Julio Cortázar",
+          "Isabel Allende"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿En qué año llegó el hombre a la Luna?",
+        "options": [
+          "1965",
+          "1969",
+          "1972",
+          "1959"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es el elemento químico con símbolo O?",
+        "options": [
+          "Oro",
+          "Oxígeno",
+          "Osmio",
+          "Oxalato"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Quién fue el primer presidente de Estados Unidos?",
+        "options": [
+          "Abraham Lincoln",
+          "Thomas Jefferson",
+          "George Washington",
+          "John Adams"
+        ],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "¿En qué país se encuentra la Torre de Pisa?",
+        "options": [
+          "Francia",
+          "Italia",
+          "España",
+          "Grecia"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es el océano más grande del mundo?",
+        "options": [
+          "Atlántico",
+          "Índico",
+          "Pacífico",
+          "Ártico"
+        ],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "¿Quién es el autor de \"Don Quijote de la Mancha\"?",
+        "options": [
+          "Miguel de Cervantes",
+          "Lope de Vega",
+          "Federico García Lorca",
+          "Gustavo Adolfo Bécquer"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿En qué ciudad se encuentra el Coliseo?",
+        "options": [
+          "Atenas",
+          "Roma",
+          "París",
+          "Estambul"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es el planeta más grande del sistema solar?",
+        "options": [
+          "Saturno",
+          "Júpiter",
+          "Marte",
+          "Venus"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Quién descubrió América?",
+        "options": [
+          "Cristóbal Colón",
+          "Hernán Cortés",
+          "Vasco da Gama",
+          "Fernando de Magallanes"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿En qué país nació el tango?",
+        "options": [
+          "Brasil",
+          "Argentina",
+          "México",
+          "Chile"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es la moneda oficial de Japón?",
+        "options": [
+          "Yuan",
+          "Yen",
+          "Won",
+          "Dólar"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Quién escribió \"Romeo y Julieta\"?",
+        "options": [
+          "William Shakespeare",
+          "Charles Dickens",
+          "Jane Austen",
+          "Oscar Wilde"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿En qué año terminó la Segunda Guerra Mundial?",
+        "options": [
+          "1942",
+          "1945",
+          "1950",
+          "1939"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es el país más grande del mundo?",
+        "options": [
+          "Canadá",
+          "China",
+          "Rusia",
+          "Estados Unidos"
+        ],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "¿Quién fue el creador de la teoría de la relatividad?",
+        "options": [
+          "Isaac Newton",
+          "Albert Einstein",
+          "Galileo Galilei",
+          "Nikola Tesla"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿En qué continente está Brasil?",
+        "options": [
+          "África",
+          "América",
+          "Europa",
+          "Oceanía"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿En qué ciudad se encuentra la Sagrada Familia?",
+        "options": [
+          "Madrid",
+          "Barcelona",
+          "Valencia",
+          "Sevilla"
+        ],
+        "answer": 1,
+        "points": 2
+      }
+    ]
+  },
+  {
+    "id": "isi-mayo-2019",
+    "name": "ISI-Mayo-2019",
+    "questions": [
+      {
+        "question": "1.- ¿Cuál es la definición que mejor refleja el término DevOps?",
+        "options": [
+          "Es una cultura de desarrollo y operación de software por equipos multidisciplinares.",
+          "Es una cultura de desarrollo de software por equipos multidisciplinares.",
+          "Es una metodología de integración de sistemas IT definida en BNMP",
+          "Es una implementación concreta del modelo en cascada."
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "2.- ¿Cuales son las fases de DevOps?",
+        "options": [
+          "Code, building, test, release",
+          "Code, building, test, release, deploy, operate, monitor, feedback&plan",
+          "Requirements, code, test, building, release",
+          "Code, test, building, release, deploy, operate, monitor, feedback&plan"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "3.- ¿El concepto de artefacto software, a qué fase de DevOps pertenece?",
+        "options": [
+          "Code",
+          "Test",
+          "Building",
+          "Release"
+        ],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "4.- En el proceso de un proyecto de integración, cuando definimos el objetivo y contexto de la integración, ¿qué paso se incluye?",
+        "options": [
+          "Determina la plataforma de mensajería a integrar",
+          "Evalúa y cuantifica los riesgos de cambios en las condiciones de servicio con terceros.",
+          "Identificar los KPIs del proyecto",
+          "Todos los anteriores"
+        ],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "5.- ¿Qué define la arquitectura de referencia de una empresa?",
+        "options": [
+          "los detalles de implementación de los sistemas que la componen",
+          "Los detalles de las capacidades de cada componente",
+          "Los principales componentes del sistema en términos genéricos y las conexiones previstas entre esos componentes",
+          "Se define todo lo anterior."
+        ],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "6.- ¿Qué define la arquitectura de solución de una empresa?",
+        "options": [
+          "Especifica cómo debe contruirse y funcionar un sistema específico",
+          "Es la lista de sistemas y servicios IT (tanto hardware como software)",
+          "Los principales componentes del sistema en términos genéricos y las conexiones previstas entre esos componentes",
+          "Se define todo lo anterior."
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "7.- Marca la sentencia correcta:",
+        "options": [
+          "Una arquitectura “as-is” describe el estado futuro del SE",
+          "Una arquitectura “to-be” tiene una vida útil más larga que una arquitectura “as-is”",
+          "Una arquitectura “as-is” es permanente y refleja la parte del diagrama general de la empresa que no cambia.",
+          "Cualquier arquitectura empresarial es un artefacto duradero."
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "8.- ¿qué lenguaje de modelado se diseñó específicamente para modelar flujos de trabajo empresariales?",
+        "options": [
+          "ITIL",
+          "UMLv2.0",
+          "SysML",
+          "BPMN"
+        ],
+        "answer": 3,
+        "points": 1
+      },
+      {
+        "question": "9.- Recién llegado a la empresa iVinciSL, le encargan el diseño de una estructura de datos, vocabulario y semántica del mundo del vino para la integración de 4 aplicaciones de cuatro bodegas distintas que se unen a una matriz del mundo del embotellado. ¿Qué lenguaje utiliza para dicho diseño?:",
+        "options": [
+          "OWL",
+          "UML",
+          "SysML",
+          "BPMN"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "10.- Al corazón de las plataformas de mensajes, que se encarga de recibir los mensajes y distribuirlos se denomina:",
+        "options": [
+          "Los topics o canales que se definen",
+          "Broker de mensajes",
+          "Consumidores/Subscriptores",
+          "Paquete de mensaje"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "11.- Un Key Performance Indicator o KPI, al cual le añadimos un objetivo específico debe ser:",
+        "options": [
+          "Específico y medible",
+          "Específico, medible y alcanzable",
+          "Específico, medible, alcanzable y relevante",
+          "Específico, medible, alcanzable, relevante y limitado en el tiempo."
+        ],
+        "answer": 3,
+        "points": 1
+      },
+      {
+        "question": "12.- ¿Qué se define como un conjunto de buenas prácticas que ayudan a las organizaciones a mejorar sus procesos en organizaciones proveedoras de servicios?",
+        "options": [
+          "ITIL (Information Technology Infrastructure Library)",
+          "CMMI (Capability Maturity Model Integration)",
+          "SCM (Supply Chain Management)",
+          "CRM (Customer Relationship Management)"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "13.- Los microservicios son",
+        "options": [
+          "servicios autónomos y poco acoplados",
+          "servicios autónomos y muy acoplados",
+          "servicios orientados a eventos poco acoplados",
+          "servicios orientados a eventos y muy acoplados"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "14.- Un patrón de integración que pasa de un formato a otro, encapsula las complejidades de la interacción entre dos sistemas, formatos y/o protocolos. ¿Cómo se denomina?",
+        "options": [
+          "Broker de eventos",
+          "Pasarela o Gateway",
+          "Serialización",
+          "Base de datos compartidas"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "15.- ¿Cómo se caracteriza el nivel 1 en la gestión y planificación de la capacidad de los Sistemas de Información?",
+        "options": [
+          "Se realizan medidas de tendencia y predicción de la utilización en periodos pico. Se planifica la capacidad de los recursos con revisiones periódicas",
+          "No existe un programa de gestión de la capacidad, y la gestión de la capacidad se realiza ocasionalmente.",
+          "Se conocen exactamente las utilizaciones de cada uno de los recursos debidas a las cargas de trabajo significativas.",
+          "Existe un sistema automático de análisis y predicción de la carga de trabajo"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "16.- Señala la afirmación falsa. En una plataforma de mensajes, el broker:",
+        "options": [
+          "Gestiona los mensajes y canales",
+          "Se encarga de la autenticación de los publicadores/subscriptores",
+          "Se implementa en todos los lenguajes soportados por la plataforma de mensajes (java, c, c++, etc.)",
+          "Se debe replicar para aumentar la fiabilidad."
+        ],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "17.- ¿Cual de los siguientes casos es peor para aplicar una plataforma de mensajes para un proyecto de integración?:",
+        "options": [
+          "Integración de servicios donde un servicio produce información que muchos servicios distribuidos consumen.",
+          "Integración de servicios basada en estado y comunicación asíncrona",
+          "Integración de servicios basada en estado y comunicación síncrona",
+          "Integración de servicios mediante la definición de un pipeline."
+        ],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "18.- Estamos modelando la capacidad futura que debe tener el próximo servidor de la empresa. Le indican que use técnicas de regresión. Las técnicas de regresión son apropiadas para trabajar con datos:",
+        "options": [
+          "casi estacionarios y no lineales.",
+          "no estacionales y donde tenemos muy pocos históricos",
+          "estacionales sin ningún tipo de tendencia definida.",
+          "no estacionales que muestran una tendencia"
+        ],
+        "answer": 3,
+        "points": 1
+      },
+      {
+        "question": "19.- ¿Cómo se define al documento donde se especifican los umbrales de productividad, rendimiento y de disponibilidad exigidos y pactados entre los usuarios y la organización de soporte de los SI de la instalación?",
+        "options": [
+          "BNMP (Business Net Management Protocol)",
+          "SLA (Service Level Agreement)",
+          "QoS (Quality of Service)",
+          "OKR Objetive Key Result"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "20.- ¿Qué solución estandarizada tiene como objetivos estratégicos la creación de una arquitectura común de procesos empresariales, la normalización de los datos maestros internos y externos y la estandarización de la arquitectura del sistema informático?",
+        "options": [
+          "Supply Chain Management (SCM)",
+          "Customer Relationship Management (CRM)",
+          "Big Data Analytics (BDA)",
+          "Enterprise Resource Planning (ERP)"
+        ],
+        "answer": 3,
+        "points": 1
+      },
+      {
+        "question": "21.- Los siguientes pasos etiquetados como 1) Pruebas, Monitoreo y Optimización 2) Define los requisitos de latencia y rendimiento. 3) Definir los mensajes 4) Instalar y Configurar la plataforma de mensajería. Forman parte de una checklist destinada a la integración de SI mediante una plataforma de mensajes. ¿En qué orden aconseja realizarlos?",
+        "options": [
+          "1→ 2 →3→ 4",
+          "3→ 2 → 4→ 1",
+          "3→ 2 → 1→ 4",
+          "4→ 2 → 1→ 3"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "22.- ¿Cuál es el principal reto de un proyecto de integración?",
+        "options": [
+          "Integrar la última tecnología del mercado.",
+          "Optimizar el uso del entorno cloud",
+          "Capturar toda la semántica, sintaxis y temporización de los servicios y datos a integrar y que sigan dando soporte a los procesos de negocio.",
+          "Todos los retos enumerados son retos de todos los proyectos de integración."
+        ],
+        "answer": 2,
+        "points": 1
+      }
+    ]
+  },
+  {
+    "id": "musica",
+    "name": "musica",
+    "questions": [
+      {
+        "question": "¿Quién es conocido como el 'Rey del Pop'?",
+        "options": [
+          "Elvis Presley",
+          "Michael Jackson",
+          "Prince",
+          "Freddie Mercury"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Qué banda británica lanzó el álbum 'Abbey Road'?",
+        "options": [
+          "The Rolling Stones",
+          "The Beatles",
+          "Queen",
+          "Pink Floyd"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Cuál es el nombre real de la cantante Lady Gaga?",
+        "options": [
+          "Stefani Germanotta",
+          "Alicia Keys",
+          "Robyn Fenty",
+          "Adele Adkins"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿Qué compositor es famoso por su Novena Sinfonía?",
+        "options": [
+          "Mozart",
+          "Beethoven",
+          "Bach",
+          "Chopin"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Quién canta la canción 'Shape of You'?",
+        "options": [
+          "Ed Sheeran",
+          "Justin Bieber",
+          "Shawn Mendes",
+          "Sam Smith"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿En qué país nació el reggaetón?",
+        "options": [
+          "Puerto Rico",
+          "Colombia",
+          "Cuba",
+          "México"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿Cuál es el nombre del álbum debut de Rosalía?",
+        "options": [
+          "El Mal Querer",
+          "Los Ángeles",
+          "Motomami",
+          "F*cking Money Man"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Qué instrumento toca Yo-Yo Ma?",
+        "options": [
+          "Violín",
+          "Piano",
+          "Violonchelo",
+          "Guitarra"
+        ],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "¿Quién es el líder de la banda U2?",
+        "options": [
+          "Bono",
+          "The Edge",
+          "Adam Clayton",
+          "Larry Mullen Jr."
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿Qué artista popularizó el 'moonwalk'?",
+        "options": [
+          "James Brown",
+          "Michael Jackson",
+          "Usher",
+          "Chris Brown"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Cuál es el género musical de AC/DC?",
+        "options": [
+          "Pop",
+          "Rock",
+          "Jazz",
+          "Reggae"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Qué cantante española ganó Eurovisión en 1968?",
+        "options": [
+          "Rocío Jurado",
+          "Massiel",
+          "Lola Flores",
+          "Isabel Pantoja"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Quién compuso 'Bohemian Rhapsody'?",
+        "options": [
+          "Brian May",
+          "Freddie Mercury",
+          "Roger Taylor",
+          "John Deacon"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Qué rapero lanzó el álbum 'DAMN.' en 2017?",
+        "options": [
+          "Drake",
+          "Kendrick Lamar",
+          "J. Cole",
+          "Kanye West"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Cuál es el nombre artístico de Abel Tesfaye?",
+        "options": [
+          "The Weeknd",
+          "Drake",
+          "Post Malone",
+          "Frank Ocean"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿Qué grupo español canta 'La Flaca'?",
+        "options": [
+          "Estopa",
+          "Jarabe de Palo",
+          "El Canto del Loco",
+          "La Oreja de Van Gogh"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Quién es la voz principal de Coldplay?",
+        "options": [
+          "Chris Martin",
+          "Jonny Buckland",
+          "Guy Berryman",
+          "Will Champion"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿Qué cantante lanzó el álbum 'Future Nostalgia'?",
+        "options": [
+          "Dua Lipa",
+          "Ariana Grande",
+          "Billie Eilish",
+          "Taylor Swift"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿En qué década surgió el movimiento grunge?",
+        "options": [
+          "Años 60",
+          "Años 70",
+          "Años 80",
+          "Años 90"
+        ],
+        "answer": 3,
+        "points": 1
+      },
+      {
+        "question": "¿Qué compositor español es famoso por su obra 'Concierto de Aranjuez'?",
+        "options": [
+          "Isaac Albéniz",
+          "Enrique Granados",
+          "Joaquín Rodrigo",
+          "Manuel de Falla"
+        ],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "¿Quién interpreta la canción 'Bad Guy'?",
+        "options": [
+          "Billie Eilish",
+          "Lorde",
+          "Halsey",
+          "Selena Gomez"
+        ],
+        "answer": 0,
+        "points": 1
+      }
+    ]
+  },
+  {
+    "id": "test",
+    "name": "test",
+    "questions": [
+      {
+        "question": "Prueba",
+        "options": [
+          "alcanzable",
+          "relevante",
+          "específico",
+          "medible"
+        ],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "¿Cuál es la capital de Japón?",
+        "options": [
+          "Tokio",
+          "Kioto",
+          "Osaka",
+          "Hiroshima"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿Qué océano se encuentra al este de África?",
+        "options": [
+          "Atlántico",
+          "Índico (es este)",
+          "Pacífico",
+          "Ártico"
+        ],
+        "answer": 1,
+        "points": 1
+      }
+    ]
+  }
+]

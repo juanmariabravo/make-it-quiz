@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "python scripts/parse_quizzes.py && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-quizzes": "python ../scripts/parse_quizzes.py"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
