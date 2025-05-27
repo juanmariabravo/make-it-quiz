@@ -25,7 +25,7 @@ node -v
 ## 🛠️ Uso del dev
 ```shell
 cd src
-npm install
+npm install # o npm install --legacy-peer-deps en caso de problemas con dependencias
 npm run dev
 ```
 
