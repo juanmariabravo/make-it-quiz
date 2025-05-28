@@ -273,9 +273,10 @@ export default function StudyModePage() {
               disabled={showFeedback}
             >
               {currentQuestion.options.map((option, index) => (
-                <div
+                <Label
                   key={index}
-                  className={`flex items-center space-x-2 p-3 rounded-lg border ${
+                  htmlFor={`option-${index}`}
+                  className={`flex items-center space-x-2 p-3 rounded-lg border flex-1 cursor-pointer transition-colors ${
                     showFeedback && index === currentQuestion.answer
                       ? "border-green-500 bg-green-50 dark:bg-green-900/20"
                       : showFeedback && index === selectedOption && index !== currentQuestion.answer
@@ -284,16 +285,14 @@ export default function StudyModePage() {
                   }`}
                 >
                   <RadioGroupItem value={index.toString()} id={`option-${index}`} />
-                  <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
-                    {option}
-                  </Label>
+                  <span className="flex-1">{option}</span>
                   {showFeedback && index === currentQuestion.answer && (
                     <Check className="h-5 w-5 text-green-600" />
                   )}
                   {showFeedback && index === selectedOption && index !== currentQuestion.answer && (
                     <X className="h-5 w-5 text-red-600" />
                   )}
-                </div>
+                </Label>
               ))}
             </RadioGroup>
 

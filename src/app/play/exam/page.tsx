@@ -94,7 +94,7 @@ export default function ExamModePage() {
     // Limpiar la selección al avanzar a la siguiente pregunta
     if (!isLastQuestion) {
       setSelectedOption(null)
-      console.log("Avanzando a la siguiente pregunta:", nextQuestion)
+      //console.log("Avanzando a la siguiente pregunta:", nextQuestion)
     }
 
     // Si es la última pregunta, finalizar el examen
@@ -381,15 +381,14 @@ export default function ExamModePage() {
               className="space-y-3"
             >
               {currentQuestion.options.map((option, index) => (
-                <div
-                  key={index}
-                  className="flex items-center space-x-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700"
-                >
-                  <RadioGroupItem value={index.toString()} id={`option-${index}`} />
-                  <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
-                    {option}
-                  </Label>
-                </div>
+              <Label
+                key={index}
+                htmlFor={`option-${index}`}
+                className="flex items-center space-x-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 flex-1 cursor-pointer"
+              >
+                <RadioGroupItem value={index.toString()} id={`option-${index}`} />
+                <span className="flex-1">{option}</span>
+              </Label>
               ))}
             </RadioGroup>
           </CardContent>

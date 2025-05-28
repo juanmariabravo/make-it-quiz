@@ -10,6 +10,7 @@ En este documento encontrarás una lista de tareas pendientes y mejoras que se p
 
 ##### Correcciones de errores
 
+- [x] Al pasar a la siguiente pregunta, la opción seleccionada en la pregunta anterior no se deselecciona.
 - [ ] Al desplazarse a preguntas anteriormente contestadas, en ocasiones se "olvida" la respuesta indicada y se permite volver a seleccionar una respuesta. Esto hace que la suma de puntos sea incorrecta. No se debería permitir volver a responder a una pregunta ya contestada, y si se hace, se debería restar la puntuación obtenida anteriormente.
 
 ##### Nuevas funcionalidades prácticas
@@ -38,5 +39,4 @@ En este documento encontrarás una lista de tareas pendientes y mejoras que se p
 - [ ] El script de python `scripts/parse_quizzes.py`, que se debe ejecutar cada vez que queremos cargar un nuevo quiz o categoría de preguntas, debería ejecutarse automáticamente al recargar la sección de elección de categorías. Además, hace una tarea redundante y es que vuelve a parsear todos los archivos de preguntas. Debería parsear solo si hay cambios en los archivos de preguntas y los nuevos.
 
 ### Pequeños detalles de usabilidad
-- [ ] Hacer que la opción clicable abarque todo el recuadro de la respuesta. Actualmente solo es clicable el espacio del texto (color azul en la siguiente imagen):
-![alt text](assets/opcion_clicable.png)
+- [x] Hacer que la opción clicable abarque todo el recuadro de la respuesta. Arreglado el 28/05/2025 a las 19:15.
