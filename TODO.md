@@ -5,11 +5,12 @@ En este documento encontrarás una lista de tareas pendientes y mejoras que se p
 ### Mayor prioridad
 
 - [ ] Completar el desarrollo de las funcionalidades básicas de los 4 modos de juego. Por hacer queda:
-- [ ] Modo CLI
+- [x] Modo CLI
 - [ ] Modo Kahoot (llamarlo modo Fiesta)
 
 ##### Correcciones de errores
 
+- [ ] En el modo CLI, el conteo de puntos no se hace correctamente.
 - [x] Al pasar a la siguiente pregunta, la opción seleccionada en la pregunta anterior no se deselecciona.
 - [ ] Al desplazarse a preguntas anteriormente contestadas, en ocasiones se "olvida" la respuesta indicada y se permite volver a seleccionar una respuesta. Esto hace que la suma de puntos sea incorrecta. No se debería permitir volver a responder a una pregunta ya contestada, y si se hace, se debería restar la puntuación obtenida anteriormente.
 

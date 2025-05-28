@@ -62,7 +62,9 @@ export default function CliModePage() {
     setTerminalLines([])
   }
 
+  // Al seleccionar categoría y empezar el quiz
   const startQuiz = async (category: QuizCategory) => {
+    console.log("startQuiz", category)
     setSelectedCategory(category)
     setGameState({
       currentQuestion: 0,
@@ -86,17 +88,19 @@ export default function CliModePage() {
     await addTerminalLine("Iniciando cuestionario...")
     await addTerminalLine("")
 
+    console.log("Antes de mostrar la primera pregunta")
     // Mostrar la primera pregunta
-    showQuestion(0)
+    await showQuestion(0, category)
   }
 
-  const showQuestion = async (index: number) => {
-    if (!selectedCategory) return
+  // Mostrar pregunta
+  const showQuestion = async (index: number, category: QuizCategory) => {
+    const question = category.questions[index]
+    console.log("showQuestion", { index, question })
 
-    const question = selectedCategory.questions[index]
     const questionNumber = index + 1
 
-    await addTerminalLine(`Pregunta ${questionNumber}/${selectedCategory.questions.length}:`)
+    await addTerminalLine(`Pregunta ${questionNumber}/${category.questions.length}:`)
     await addTerminalLine(`> ${question.question}`)
     await addTerminalLine("")
 
@@ -108,14 +112,19 @@ export default function CliModePage() {
     await addTerminalLine("Introduce el número de tu respuesta (1-" + question.options.length + "):")
 
     setWaitingForInput(true)
+    console.log("showQuestion: setWaitingForInput(true)")
   }
 
+  // Cuando el usuario escribe en el input
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value)
+    console.log("handleInputChange", e.target.value)
   }
 
+  // Cuando el usuario envía una respuesta
   const handleInputSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    console.log("handleInputSubmit", { waitingForInput, selectedCategory, userInput })
 
     if (!waitingForInput || !selectedCategory) return
 
@@ -170,7 +179,7 @@ export default function CliModePage() {
     const nextIndex = gameState.currentQuestion + 1
 
     if (nextIndex >= selectedCategory.questions.length) {
-      finishQuiz()
+      finishQuiz(newAnswers)
     } else {
       await addTerminalLine("Presiona ENTER para continuar...")
       setWaitingForInput(true)
@@ -183,7 +192,9 @@ export default function CliModePage() {
     }
   }
 
+  // Cuando se espera continuar
   const handleContinue = async () => {
+    console.log("handleContinue", { waitingForInput, currentQuestion: gameState.currentQuestion })
     if (!selectedCategory) return
 
     setUserInput("")
@@ -193,18 +204,21 @@ export default function CliModePage() {
     // Si estamos esperando para continuar a la siguiente pregunta
     if (waitingForInput && gameState.currentQuestion < selectedCategory.questions.length) {
       setWaitingForInput(false)
-      showQuestion(gameState.currentQuestion)
+      showQuestion(gameState.currentQuestion, selectedCategory)
     }
   }
 
-  const finishQuiz = async () => {
+  // Al finalizar el quiz
+  const finishQuiz = async (answersParam?: number[]) => {
+    console.log("finishQuiz")
     if (!selectedCategory) return
 
     setWaitingForInput(false)
 
+    const answers = answersParam ?? gameState.answers
     const totalQuestions = selectedCategory.questions.length
     const totalPoints = selectedCategory.questions.reduce((sum, q) => sum + (q.points || 1), 0)
-    const correctAnswers = gameState.answers.filter((a, i) => a === selectedCategory.questions[i].answer).length
+    const correctAnswers = answers.filter((a, i) => a === selectedCategory.questions[i].answer).length
     const percentageScore = Math.round((gameState.score / totalPoints) * 100)
 
     await addTerminalLine("┌─────────────────────────────────────┐")
