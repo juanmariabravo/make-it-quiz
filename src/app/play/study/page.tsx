@@ -23,6 +23,8 @@ export default function StudyModePage() {
   const [selectedOption, setSelectedOption] = useState<number | null>(null)
   const [showFeedback, setShowFeedback] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [penalizacion, setPenalizacion] = useState(false)
+  const [penalizacionValor, setPenalizacionValor] = useState(0.33)
 
   useEffect(() => {
     async function fetchCategories() {
@@ -63,9 +65,16 @@ export default function StudyModePage() {
     const newAnswers = [...gameState.answers]
     newAnswers[gameState.currentQuestion] = selectedOption
 
+    let newScore = gameState.score
+    if (isCorrect) {
+      newScore += points
+    } else if (penalizacion) {
+      newScore -= penalizacionValor
+    }
+
     setGameState({
       ...gameState,
-      score: isCorrect ? gameState.score + points : gameState.score,
+      score: newScore,
       answers: newAnswers,
     })
 
@@ -308,7 +317,9 @@ export default function StudyModePage() {
                 <div className="text-sm text-muted-foreground">
                   {isCorrect
                     ? `Has ganado ${currentQuestion.points || 1} punto${(currentQuestion.points || 1) > 1 ? "s" : ""}.`
-                    : `La respuesta correcta era: ${currentQuestion.options[currentQuestion.answer]}`}
+                    : `La respuesta correcta era: ${currentQuestion.options[currentQuestion.answer]}. ${
+                        penalizacion ? "Has perdido " + penalizacionValor + " puntos por fallar." : ""
+                      }`}
                 </div>
               </div>
             )}
@@ -337,10 +348,41 @@ export default function StudyModePage() {
         </Card>
 
         <div className="mt-6 flex justify-between items-center">
-          <div className="text-sm text-muted-foreground">
-            Puntuación actual: <span className="font-medium">{gameState.score}</span>
-          </div>
+            <div className="text-sm text-muted-foreground">
+            Puntuación actual:{" "}
+            <span className="font-medium">
+              {Number.isInteger(gameState.score)
+              ? gameState.score
+              : gameState.score.toFixed(2)}
+            </span>{" "}
+            puntos
+            </div>
         </div>
+
+        <div className="mb-4 flex items-center gap-2">
+          <input
+            type="checkbox"
+            id="penalizacion"
+            checked={penalizacion}
+            onChange={() => setPenalizacion((v) => !v)}
+            className="accent-purple-600"
+          />
+          <label htmlFor="penalizacion" className="text-sm">
+            Penalización por fallo
+          </label>
+          <input
+            type="number"
+            step="0.01"
+            min="0"
+            value={penalizacionValor}
+            onChange={(e) => setPenalizacionValor(Number(e.target.value))}
+            disabled={!penalizacion}
+            className="w-20 px-2 py-1 border rounded text-sm"
+          />
+          <span className="text-sm">puntos</span>
+        </div>
+
+        {penalizacion}
       </div>
     </div>
   )

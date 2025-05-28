@@ -18,7 +18,7 @@ En este documento encontrarás una lista de tareas pendientes y mejoras que se p
 - [ ] Test aleatorios: de una categoría de muchas preguntas, seleccionar un número concreto de preguntas aleatorias para jugar.
 - [ ] Permitir omitir el clic en Comprobar en el modo Estudio. Antes de jugar, checkbox con la opción de "Permitir cambiar respuesta".
 - [ ] Añadir un botón de "Ayuda" en cada pregunta para consultar antes o después de contestar en el modo Estudio, o después de contestar en el modo Examen. Esto implica cambiar el formato de los archivos de preguntas para incluir una línea o clave del json que contenga la ayuda para cada pregunta. Aprovechando esta modificación, se puede añadir otro campo para incluir una imagen o vídeo que acompañe a la pregunta, y también se puede añadir un campo para incluir una pista o sugerencia que se muestre al usuario antes de responder.
-- [ ] Permitir calificaciones más restrictivas como que se aplique penalización (parametrizada y elegible) por cada respuesta incorrecta, o que se aplique un ajuste en la calificación final para corregir el factor de aleatoriedad de las respuestas.
+- [~] (a medio hacer) Permitir calificaciones más restrictivas como que se aplique penalización (parametrizada y elegible) por cada respuesta incorrecta, o que se aplique un ajuste en la calificación final para corregir el factor de aleatoriedad de las respuestas.
 - [ ] Opción de guardar resultados en un archivo de texto o JSON al finalizar el juego, para que el usuario pueda revisar sus respuestas y puntuación posteriormente.
 - [ ] Poder modificar el tiempo en cada categoría de preguntas. Actualmente, el tiempo se calcula con 30 segundos por pregunta (línea 57 de `src\app\play\exam\page.tsx`).
 
@@ -26,6 +26,7 @@ En este documento encontrarás una lista de tareas pendientes y mejoras que se p
 
 ##### Funcionalidades adicionales
 
+- [ ] Crear un menú de opciones para cada test (mal llamado categoría). También un menú de opciones por defecto para cada modo de juego, que permita cambiar el tiempo por pregunta, activar o desactivar la penalización por respuestas incorrectas, activar o desactivar la opción de cambiar respuesta, etc. Este menú debería ser accesible desde el inicio del juego y también desde el menú de pausa durante el juego.
 - [ ] Implementar nuevos modos de juego o adaptar el modo Kahoot (llamarlo modo Fiesta).
 - [ ] Modo "Adivina la respuesta" (pregunta con opciones múltiples).
 - [ ] Modo "Completa la frase" (pregunta con una palabra o frase a completar).
