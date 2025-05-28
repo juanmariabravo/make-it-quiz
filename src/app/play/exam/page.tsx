@@ -267,8 +267,11 @@ export default function ExamModePage() {
     ).length
     const answeredQuestions = correctAnswers + incorrectAnswers
 
-    // Calcular el total de puntos de las preguntas respondidas correctamente
-    const maxPossibleScore = correctAnswers > 0 ? correctAnswers : selectedCategory.questions.length // Si no hay respuestas correctas, usar el total de preguntas
+    // Calcular el total de puntos posibles (sumando los puntos de todas las preguntas)
+    const maxPossibleScore = selectedCategory.questions.reduce(
+      (sum, question) => sum + (question.points || 1),
+      0
+    )
 
     const percentageScore = maxPossibleScore > 0 ? Math.round((gameState.score / maxPossibleScore) * 100) : 0
 
