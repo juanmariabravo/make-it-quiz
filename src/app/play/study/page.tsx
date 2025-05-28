@@ -266,6 +266,7 @@ export default function StudyModePage() {
           </CardHeader>
           <CardContent>
             <RadioGroup
+              key={`question-${gameState.currentQuestion}`}
               value={selectedOption?.toString()}
               onValueChange={(value) => handleOptionSelect(Number.parseInt(value))}
               className="space-y-3"
@@ -278,15 +279,17 @@ export default function StudyModePage() {
                     showFeedback && index === currentQuestion.answer
                       ? "border-green-500 bg-green-50 dark:bg-green-900/20"
                       : showFeedback && index === selectedOption && index !== currentQuestion.answer
-                        ? "border-red-500 bg-red-50 dark:bg-red-900/20"
-                        : "border-gray-200 dark:border-gray-700"
+                      ? "border-red-500 bg-red-50 dark:bg-red-900/20"
+                      : "border-gray-200 dark:border-gray-700"
                   }`}
                 >
                   <RadioGroupItem value={index.toString()} id={`option-${index}`} />
                   <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
                     {option}
                   </Label>
-                  {showFeedback && index === currentQuestion.answer && <Check className="h-5 w-5 text-green-600" />}
+                  {showFeedback && index === currentQuestion.answer && (
+                    <Check className="h-5 w-5 text-green-600" />
+                  )}
                   {showFeedback && index === selectedOption && index !== currentQuestion.answer && (
                     <X className="h-5 w-5 text-red-600" />
                   )}

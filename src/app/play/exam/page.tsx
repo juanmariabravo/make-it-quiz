@@ -91,6 +91,12 @@ export default function ExamModePage() {
       currentQuestion: isLastQuestion ? prevState.currentQuestion : nextQuestion,
     }))
 
+    // Limpiar la selección al avanzar a la siguiente pregunta
+    if (!isLastQuestion) {
+      setSelectedOption(null)
+      console.log("Avanzando a la siguiente pregunta:", nextQuestion)
+    }
+
     // Si es la última pregunta, finalizar el examen
     if (isLastQuestion) {
       finishExam(newAnswers)
@@ -115,6 +121,8 @@ export default function ExamModePage() {
     setTimeout(() => {
       if (prevAnswer !== -1) {
         setSelectedOption(prevAnswer)
+      } else {
+        setSelectedOption(null) // <-- Añade esto para limpiar si no hay respuesta previa
       }
     }, 0)
   }
@@ -365,7 +373,7 @@ export default function ExamModePage() {
           </CardHeader>
           <CardContent>
             <RadioGroup
-              value={selectedOption?.toString()}
+              value={selectedOption !== null ? selectedOption.toString() : ""}
               onValueChange={(value) => handleOptionSelect(Number.parseInt(value))}
               className="space-y-3"
             >
