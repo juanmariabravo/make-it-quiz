@@ -8,8 +8,8 @@ Herramienta para crear y jugar tests interativos **personalizados** con múltipl
 
 ## 📦 Instalación  
 ```bash
-git clone https://github.com/tu-usuario/quiz-maker.git
-cd quiz-maker
+git clone https://github.com/tu-usuario/make-it-quiz
+cd make-it-quiz
 ```
 
 ## 🆕 Crear o añadir mis propias preguntas
