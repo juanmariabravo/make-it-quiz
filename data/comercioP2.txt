@@ -1,0 +1,259 @@
+1. ¿Qué servidores necesita Prestashop?
+a) Servidor de base de datos y de aplicaciones
+b) Servidor Web y de base de datos
+c) Servidor Web y de aplicaciones
+d) Servidor frontend y backend
+Solución: b)
+
+2. ¿Cuál es el servidor hardware que registra transacciones?
+a) Servidor BBDD
+b) Servidor de transacciones
+c) Servidor de archivos
+d) Servidor de correo
+Solución: a)
+
+3. El servidor web sirve peticiones dinámicas
+a) Verdadero
+b) Falso
+Solución: b)
+
+4. ¿Cuál es un elemento esencial en una tienda online?
+a) Catálogo claro y proceso de compra accesible
+b) Registro obligatorio desde el inicio
+c) Solo texto sin imágenes
+d) Navegación basada en menus complejos
+Solución: a)
+
+5. Un proceso de checkout adecuado debe incluir:
+a) Simplicidad, opciones variadas y seguridad
+b) Un solo método de pago
+c) Pop-ups durante el pago
+d) Formularios extensos
+Solución: a)
+
+6. ¿Qué debe contener una buena ficha de producto?
+a) Información completa y recursos visuales de calidad
+b) Solo una descripción breve
+c) Imágenes pequeñas y poco detalle
+d) Datos técnicos sin explicación
+Solución: a)
+
+7. ¿Cuál es una de las características clave de un CMS?
+a) La separación entre el contenido y el diseño (plantillas).
+b) Requieren obligatoriamente conocimientos de infraestructura.
+c) La gestión es exclusivamente para un único usuario.
+d) No permiten la integración con bases de datos.
+Solución: a)
+
+8. Un usuario quiere utilizar uno de estos CMS genéricos. Lo que más valora es la facilidad de uso. ¿Cuál le recomendarías?
+a) Joomla
+b) Drupal
+c) Wordpress
+d) Cualquiera de los anteriores, ya que todos son genéricos.
+Solución: c)
+
+9. Al comparar la seguridad de las extensiones de e-commerce, ¿cuál se describe como "extremadamente robusta (innata)"?
+a) Drupal Commerce
+b) WooCommerce
+c) VirtueMart
+d) Ninguna se considera segura sin añadir alguna extensión adicional.
+Solución: a)
+
+10. ¿Qué ventaja principal ofrecen los CMS genéricos frente a los específicos para e-commerce?
+a) Facilidad de uso y curva de aprendizaje más baja
+b) Mayor escalabilidad para grandes catálogos
+c) Gestión avanzada de pedidos y pagos integrada
+d) Control total sobre el código fuente
+Solución: a)
+
+11. ¿Cuál de las siguientes afirmaciones sobre WordPress es correcta?
+a) WordPress.org permite autohosting y personalización total
+b) WordPress.org es SaaS y WordPress.com es On-Premise
+c) WordPress.com ofrece control completo del código fuente
+d) WordPress.org no admite plugins para e-commerce
+Solución: a)
+
+12. ¿Cuál es la principal limitación de Joomla frente a WordPress?
+a) Curva de aprendizaje más alta y configuración compleja
+b) Falta de soporte para multiusuario
+c) No permite integración con bases de datos
+d) Menor seguridad
+Solución: a)
+
+13. Una startup de moda local quiere lanzar su tienda online lo más rápido posible, presupuesto inicial limitado que usan?
+a) Una plataforma SaaS (Software as a Service) como Shopify o Tiendy.
+b) DIY para tener control total desde el principio.
+c) Un CMS general como WordPress con el plugin WooCommerce.
+d) Un gestor de contenidos especifico (autohospedado) como PrestaShop.
+Solución: a)
+
+14. Si un cliente en Zara utiliza el menú para ver "PARTES DE ARRIBA" y luego filtra por "COLOR", ¿qué está usando?
+a) Con el Front End, que a su vez solicita información al Back End.
+b) Con la plataforma Sans que gestiona los pagos
+c) Exclusivamente con el Back End.
+d) Exclusivamente con el Servidor Web, que sirve contenido estático.
+Solución: a)
+
+15. ¿Qué se puede personalizar fácilmente en PrestaShop sin tocar código?
+a) Diseño con temas y módulos
+b) El núcleo del sistema
+c) La seguridad del servidor
+d) Configuración del servidor hosting
+Solución: a)
+
+16. ¿Cuál es un inconveniente de los CMS específicos de e-commerce?
+a) La especialización puede limitar su uso en proyectos variados
+b) Requieren más recursos y mantenimiento
+c) Su escalabilidad está limitada
+d) No ofrecen funciones básicas de venta
+Solución: b)
+
+17. ¿Cuándo es mejor un modelo On-Premise frente a Saas o Paas?
+a) Para control total de seguridad, infraestructura y personalización
+b) Para evitar mantenimiento del sistema
+c) Para pagar solo por uso mensual
+d) Para usar una plataforma lista sin instalar
+Solución: a)
+
+18. ¿Cuál es un problema común en un CMS al personalizar el sitio?
+a) Hay que ajustar compatibilidades de versiones y plugins
+b) No se pueden usar temas o plantillas externas
+c) Solo se pueden usar bases de datos del proveedor
+d) No se puede modificar el código fuente
+Solución: a)
+
+19. ¿Cuál es la definición principal de una tienda online?
+a) Plataforma digital para la compra-venta de productos/servicios por internet
+b) Una página web para la gestión de compras y ventas por internet.
+c) Un entorno digital para la gestión de ventas, inventario y logistica.
+d) Un conjunto de tecnologias de hardware y software para marketing digital.
+Solución: a)
+
+20. ¿Cuáles son variables clave que influyen en la definición de la funcionalidad requerida para una solución e-commerce?
+a) El tipo de negocio y el producto/servicio ofrecido.
+b) La ubicación física de los servidores de la empresa.
+c) La velocidad de conexión a Internet del desarrollador
+d) El número de empleados en el departamento de marketing.
+Solución: a)
+
+21. ¿Qué aspecto es crucial para la planificación financiera a largo plazo?
+a) La diferencia entre los costos iniciales y los costos recurrentes
+b) Elegir siempre la solución personalizada por ser más completa.
+c) Priorizar el gasto en hardware sobre el software.
+d) Calcular únicamente el Retorno de Inversion (ROI) del primer año.
+Solución: a)
+
+22. ¿Cuál de los siguientes se considera un servidor web?
+a) Apache Tomcat
+b) Apache Green
+c) Node.js
+d) Nginx
+Solución: d)
+
+23. ¿Qué afirmaciones sobre un servidor web son correctas?
+a) Ejecuta la lógica de negocio y conecta con bases de datos
+b) Sirve contenido estático como HTML o CSS
+c) Gestiona las peticiones HTTP
+d) Redirige peticiones al servidor de aplicaciones
+e) Gestiona el envío de correos mediante el protocolo SMTP
+f) Ejecuta scripts PHP directamente sin necesidad de un intérprete externo
+Solución: b), c), d)
+
+24. ¿Cuál de los siguientes se considera un servidor de aplicaciones?
+a) Apache HTTP Server
+b) Nginx
+c) FileZilla Server
+d) Apache Tomcat
+Solución: d)
+
+25. ¿Qué función principal cumple un servidor de aplicaciones?
+a) Servir contenido estático y gestionar peticiones HTTP
+b) Ejecutar la lógica de negocio y generar contenido estático
+c) Ejecutar la lógica de negocio y generar contenido dinámico
+d) Almacenar archivos de configuración del sistema
+Solución: c)
+
+26. Ordena según su complejidad en cuanto al desarrollo de una solución e-commerce (de mayor a menor)
+a) PrestaShop > DIY > Drupal > Shopify
+b) DIY > PrestaShop > Drupal > Shopify
+c) DIY > Shopify > Drupal > PrestaShop
+d) DIY > Shopify > PrestaShop > Drupal
+e) Drupal > DIY > PrestaShop > Shopify
+f) Shopify > DIY > PrestaShop > Drupal
+Solución: b)
+
+27. ¿Qué elementos necesitamos para montar una solución e-commerce basada en WordPress + WooCommerce?
+a) Servidor web
+b) Servidor de aplicaciones
+c) Servidor de bases de datos
+d) Intérprete PHP
+e) Servidor FTP
+f) Servidor DNS
+Solución: a), c), d)
+
+28. ¿Cuál de los siguientes no es un CMS genérico?
+a) WordPress
+b) Joomla
+c) PrestaShop
+d) Drupal
+Solución: c)
+
+29. Selecciona las características que definen a los CMS genéricos como Drupal, Joomla y WordPress
+a) Incluyen de forma nativa la gestión de usuarios y roles
+b) Incluyen de forma nativa módulos de venta
+c) Incluyen de forma nativa la gestión de pedidos
+d) Los tres son de código abierto
+e) Ofrecen plugins y extensiones para ampliar funcionalidades
+f) No permiten el uso de plantillas
+Solución: a), d), e)
+
+30. ¿Cuál de los siguientes usarías como base para una solución e-commerce de alto rendimiento y fuertemente segura?
+a) Joomla + VirtueMart
+b) WordPress sin extensiones
+c) Drupal + Drupal Commerce
+d) WordPress + WooCommerce
+Solución: c)
+
+31. ¿Cuál es la forma más habitual de trabajo en el desarrollo?
+a) Desarrollo (remoto) → Pruebas (local) → Producción (local)
+b) Desarrollo (local) → Pruebas (remoto) → Producción (remoto)
+c) Desarrollo (local) → Pruebas (local) → Producción (local)
+d) Desarrollo (remoto) → Pruebas (remoto) → Producción (local)
+Solución: b)
+
+32. En una solución e-commerce, ¿qué diferencia existe entre Front-office y Back-office?
+a) Front-office → código del cliente / Back-office → código del servidor
+b) Front-office → base de datos / Back-office → interfaz web
+c) Front-office → entorno de pruebas / Back-office → entorno de producción
+d) Front-office → parte visible para el cliente / Back-office → gestión interna
+Solución: d)
+
+33. ¿Qué limitación puede tener trabajar en local durante el desarrollo?
+a) El desarrollador no puede realizar pruebas unitarias
+b) Requiere conexión constante a Internet
+c) El desarrollador no puede ejecutar pruebas de integración
+d) Las configuraciones pueden variar entre desarrolladores
+Solución: d)
+
+34. ¿Cuáles de los siguientes componentes forman parte del paquete XAMPP?
+a) FileZilla Server
+b) Mercury Mail Server
+c) Fire server
+d) Apache Tomcat
+Solución: a), b), d)
+
+35. ¿Cuál de las siguientes opciones te permitiría trabajar en local con WordPress?
+a) Instalar manualmente un servidor web, PHP y MySQL
+b) Subir los archivos de WordPress por FTP a un dominio público
+c) Utilizar un paquete integrado como XAMPP o MAMP
+d) Usar una herramienta específica como LocalWP
+e) Desplegar WordPress en un servidor Tomcat
+f) Conectarte directamente a un hosting remoto sin entorno local
+Solución: a), c), d)
+
+36. ¿Qué es FileZilla Server?
+a) Un contenedor que ejecuta aplicaciones web
+b) Un servidor FTP que permite transferir archivos entre equipos
+c) Un navegador web de código abierto orientado a desarrolladores
+d) Es un módulo de XAMPP que gestiona bases de datos MySQL y MariaDB
+Solución: b)
