@@ -38,8 +38,17 @@ async function fetchQuestions(filename) {
         if (optMatch) {
           options.push(optMatch[2]);
         } else if (line.toLowerCase().startsWith('solución:')) {
-          const answerLetter = line.split(':')[1].trim().toLowerCase().replace(')', '');
-          answer = answerLetter.charCodeAt(0) - 'a'.charCodeAt(0);
+          const answerPart = line.split(':')[1].trim().toLowerCase();
+          // Check if multiple answers (e.g., "a), b), d)" or "a, b, d")
+          if (answerPart.includes(',') || (answerPart.match(/[a-d]/g) || []).length > 1) {
+            // Multiple answers
+            const letters = answerPart.match(/[a-d]/g) || [];
+            answer = letters.map(l => l.charCodeAt(0) - 'a'.charCodeAt(0));
+          } else {
+            // Single answer
+            const answerLetter = answerPart.replace(')', '').trim();
+            answer = answerLetter.charCodeAt(0) - 'a'.charCodeAt(0);
+          }
         } else if (line.toLowerCase().startsWith('puntos:')) {
           points = parseInt(line.split(':')[1].trim()) || 1;
         }
@@ -61,31 +70,104 @@ let correctCount = 0; // <-- Añade esta línea
 function showQuestion(idx) {
   selected = null;
   const q = questions[idx];
+  const isMultiAnswer = Array.isArray(q.answer);
+  
   document.getElementById('question-text').textContent = q.question;
+  if (isMultiAnswer) {
+    document.getElementById('question-text').textContent += ' (Selecciona todas las correctas)';
+  }
+  
   const optionsDiv = document.getElementById('options');
   optionsDiv.innerHTML = '';
-  q.options.forEach((opt, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'option-btn';
-    btn.textContent = `${String.fromCharCode(97 + i)}) ${opt}`;
-    btn.onclick = () => {
-      if (selected !== null) return; // Evita doble click
-      selected = i;
-      document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
-      btn.classList.add('selected');
-      if (selected === q.answer) {
-        btn.classList.add('correct');
+  
+  if (isMultiAnswer) {
+    // Multiple answers - use checkboxes
+    selected = [];
+    q.options.forEach((opt, i) => {
+      const label = document.createElement('label');
+      label.className = 'option-checkbox';
+      label.style.display = 'block';
+      label.style.marginBottom = '8px';
+      label.style.cursor = 'pointer';
+      
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.style.marginRight = '8px';
+      checkbox.onchange = () => {
+        if (checkbox.checked) {
+          selected.push(i);
+        } else {
+          selected = selected.filter(x => x !== i);
+        }
+      };
+      
+      label.appendChild(checkbox);
+      label.appendChild(document.createTextNode(`${String.fromCharCode(97 + i)}) ${opt}`));
+      optionsDiv.appendChild(label);
+    });
+    
+    const confirmBtn = document.createElement('button');
+    confirmBtn.textContent = 'Confirmar respuesta';
+    confirmBtn.className = 'btn btn-primary';
+    confirmBtn.style.marginTop = '12px';
+    confirmBtn.onclick = () => {
+      const sortedSelected = [...selected].sort();
+      const sortedAnswer = [...q.answer].sort();
+      const isCorrect = sortedSelected.length === sortedAnswer.length && 
+                       sortedSelected.every((val, i) => val === sortedAnswer[i]);
+      
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.disabled = true);
+      confirmBtn.disabled = true;
+      
+      // Mark correct answers
+      q.answer.forEach(ansIdx => {
+        optionsDiv.children[ansIdx].style.backgroundColor = '#d4edda';
+        optionsDiv.children[ansIdx].style.color = '#155724';
+      });
+      
+      if (isCorrect) {
         document.getElementById('answer-feedback').textContent = '¡Correcto!';
-        correctCount++; // <-- Suma si es correcta
+        correctCount++;
       } else {
-        btn.classList.add('incorrect');
-        optionsDiv.children[q.answer].classList.add('correct');
-        document.getElementById('answer-feedback').textContent = `Incorrecto. La respuesta era: ${String.fromCharCode(97 + q.answer)}) ${q.options[q.answer]}`;
+        // Mark wrong selections
+        selected.forEach(selIdx => {
+          if (!q.answer.includes(selIdx)) {
+            optionsDiv.children[selIdx].style.backgroundColor = '#f8d7da';
+            optionsDiv.children[selIdx].style.color = '#721c24';
+          }
+        });
+        const correctLetters = q.answer.map(i => String.fromCharCode(97 + i)).join(', ');
+        document.getElementById('answer-feedback').textContent = `Incorrecto. Las respuestas correctas eran: ${correctLetters}`;
       }
       document.getElementById('next-question').style.display = '';
     };
-    optionsDiv.appendChild(btn);
-  });
+    optionsDiv.appendChild(confirmBtn);
+  } else {
+    // Single answer - use buttons
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = `${String.fromCharCode(97 + i)}) ${opt}`;
+      btn.onclick = () => {
+        if (selected !== null) return;
+        selected = i;
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected', 'correct', 'incorrect'));
+        btn.classList.add('selected');
+        if (selected === q.answer) {
+          btn.classList.add('correct');
+          document.getElementById('answer-feedback').textContent = '¡Correcto!';
+          correctCount++;
+        } else {
+          btn.classList.add('incorrect');
+          optionsDiv.children[q.answer].classList.add('correct');
+          document.getElementById('answer-feedback').textContent = `Incorrecto. La respuesta era: ${String.fromCharCode(97 + q.answer)}) ${q.options[q.answer]}`;
+        }
+        document.getElementById('next-question').style.display = '';
+      };
+      optionsDiv.appendChild(btn);
+    });
+  }
+  
   document.getElementById('show-answer').style.display = 'none';
   document.getElementById('answer-feedback').textContent = '';
   document.getElementById('next-question').style.display = 'none';

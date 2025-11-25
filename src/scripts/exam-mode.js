@@ -32,8 +32,17 @@ async function fetchQuestions(filename) {
         if (optMatch) {
           options.push(optMatch[2]);
         } else if (line.toLowerCase().startsWith('solución:')) {
-          const answerLetter = line.split(':')[1].trim().toLowerCase().replace(')', '');
-          answer = answerLetter.charCodeAt(0) - 'a'.charCodeAt(0);
+          const answerPart = line.split(':')[1].trim().toLowerCase();
+          // Check if multiple answers (e.g., "a), b), d)" or "a, b, d")
+          if (answerPart.includes(',') || (answerPart.match(/[a-d]/g) || []).length > 1) {
+            // Multiple answers
+            const letters = answerPart.match(/[a-d]/g) || [];
+            answer = letters.map(l => l.charCodeAt(0) - 'a'.charCodeAt(0));
+          } else {
+            // Single answer
+            const answerLetter = answerPart.replace(')', '').trim();
+            answer = answerLetter.charCodeAt(0) - 'a'.charCodeAt(0);
+          }
         } else if (line.toLowerCase().startsWith('puntos:')) {
           points = parseInt(line.split(':')[1].trim()) || 1;
         }
@@ -57,26 +66,66 @@ let examDuration = 600; // segundos (10 minutos)
 let timeLeft = examDuration;
 
 function showQuestion(idx) {
-  selected = userAnswers[idx] ?? null;
   const q = questions[idx];
+  const isMultiAnswer = Array.isArray(q.answer);
+  selected = userAnswers[idx] ?? (isMultiAnswer ? [] : null);
+  
   document.getElementById('question-text').textContent = q.question;
+  if (isMultiAnswer) {
+    document.getElementById('question-text').textContent += ' (Selecciona todas las correctas)';
+  }
+  
   const optionsDiv = document.getElementById('options');
   optionsDiv.innerHTML = '';
-  q.options.forEach((opt, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'option-btn';
-    btn.textContent = `${String.fromCharCode(97 + i)}) ${opt}`;
-    if (selected === i) btn.classList.add('selected');
-    btn.onclick = () => {
-      selected = i;
-      userAnswers[idx] = i;
-      document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      document.getElementById('next-question').style.display = '';
-    };
-    optionsDiv.appendChild(btn);
-  });
-  document.getElementById('next-question').style.display = selected !== null ? '' : 'none';
+  
+  if (isMultiAnswer) {
+    // Multiple answers - use checkboxes
+    if (!Array.isArray(selected)) selected = [];
+    q.options.forEach((opt, i) => {
+      const label = document.createElement('label');
+      label.className = 'option-checkbox';
+      label.style.display = 'block';
+      label.style.marginBottom = '8px';
+      label.style.cursor = 'pointer';
+      
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.style.marginRight = '8px';
+      checkbox.checked = selected.includes(i);
+      checkbox.onchange = () => {
+        if (checkbox.checked) {
+          if (!selected.includes(i)) selected.push(i);
+        } else {
+          selected = selected.filter(x => x !== i);
+        }
+        userAnswers[idx] = [...selected];
+        document.getElementById('next-question').style.display = selected.length > 0 ? '' : 'none';
+      };
+      
+      label.appendChild(checkbox);
+      label.appendChild(document.createTextNode(`${String.fromCharCode(97 + i)}) ${opt}`));
+      optionsDiv.appendChild(label);
+    });
+  } else {
+    // Single answer - use buttons
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = `${String.fromCharCode(97 + i)}) ${opt}`;
+      if (selected === i) btn.classList.add('selected');
+      btn.onclick = () => {
+        selected = i;
+        userAnswers[idx] = i;
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        document.getElementById('next-question').style.display = '';
+      };
+      optionsDiv.appendChild(btn);
+    });
+  }
+  
+  document.getElementById('next-question').style.display = 
+    (isMultiAnswer ? selected.length > 0 : selected !== null) ? '' : 'none';
   document.getElementById('progress').textContent = `Pregunta ${idx + 1} de ${questions.length}`;
 }
 
@@ -136,7 +185,19 @@ document.getElementById('next-question').onclick = () => {
 function showExamResult() {
   correctCount = 0;
   questions.forEach((q, idx) => {
-    if (userAnswers[idx] === q.answer) correctCount++;
+    const userAns = userAnswers[idx];
+    if (Array.isArray(q.answer)) {
+      // Multiple answer question
+      const sortedUser = Array.isArray(userAns) ? [...userAns].sort() : [];
+      const sortedCorrect = [...q.answer].sort();
+      if (sortedUser.length === sortedCorrect.length && 
+          sortedUser.every((val, i) => val === sortedCorrect[i])) {
+        correctCount++;
+      }
+    } else {
+      // Single answer question
+      if (userAns === q.answer) correctCount++;
+    }
   });
 
 let resultHTML = `<h2>¡Examen finalizado!</h2>
@@ -154,21 +215,37 @@ let resultHTML = `<h2>¡Examen finalizado!</h2>
     let reviewHTML = `<ul style="list-style:none;padding:0;">`;
     questions.forEach((q, idx) => {
       const userAns = userAnswers[idx];
-      const isCorrect = userAns === q.answer;
+      let isCorrect;
+      if (Array.isArray(q.answer)) {
+        const sortedUser = Array.isArray(userAns) ? [...userAns].sort() : [];
+        const sortedCorrect = [...q.answer].sort();
+        isCorrect = sortedUser.length === sortedCorrect.length && 
+                   sortedUser.every((val, i) => val === sortedCorrect[i]);
+      } else {
+        isCorrect = userAns === q.answer;
+      }
+      
       reviewHTML += `<li style="margin-bottom:18px;">
         <div><strong>${idx + 1}. ${q.question}</strong></div>
         <div>
           ${q.options.map((opt, i) => {
             let cls = '';
-            if (i === q.answer) cls = 'correct';
-            if (userAns === i && !isCorrect) cls = 'incorrect';
+            if (Array.isArray(q.answer)) {
+              if (q.answer.includes(i)) cls = 'correct';
+              if (Array.isArray(userAns) && userAns.includes(i) && !q.answer.includes(i)) cls = 'incorrect';
+            } else {
+              if (i === q.answer) cls = 'correct';
+              if (userAns === i && !isCorrect) cls = 'incorrect';
+            }
             return `<span class="option-btn ${cls}" style="margin-right:6px;display:inline-block;">${String.fromCharCode(97 + i)}) ${opt}</span>`;
           }).join('')}
         </div>
         <div>
           ${isCorrect
             ? '<span style="color:#3bb273;font-weight:bold;">✔ Correcto</span>'
-            : `<span style="color:#e74c3c;font-weight:bold;">✘ Incorrecto</span> (Correcta: ${String.fromCharCode(97 + q.answer)})`}
+            : Array.isArray(q.answer)
+              ? `<span style="color:#e74c3c;font-weight:bold;">✘ Incorrecto</span> (Correctas: ${q.answer.map(i => String.fromCharCode(97 + i)).join(', ')})`
+              : `<span style="color:#e74c3c;font-weight:bold;">✘ Incorrecto</span> (Correcta: ${String.fromCharCode(97 + q.answer)})`}
         </div>
       </li>`;
     });
