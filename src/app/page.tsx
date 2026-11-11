@@ -66,7 +66,7 @@ export default function Home() {
               </div>
               <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground md:justify-start">
                 <span className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600" /> Tests personalizados</span>
-                <span className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600" /> Multijugador online</span>
+                <span className="flex items-center gap-2"><Check className="h-4 w-4 text-green-600" /> Ponte a prueba</span>
               </div>
             </div>
 
