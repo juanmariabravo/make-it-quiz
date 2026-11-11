@@ -41,7 +41,7 @@ pnpm run dev
 En primer lugar, selecciona el modo de juego que deseas. Puedes elegir entre:
 - **Estudio**: Un modo de juego más relajado, donde puedes estudiar las preguntas a tu ritmo y comprobar si has acertado tras contestar cada una. Se irá contando la puntuación.
 - **Examen**: Un modo de juego contrarreloj, donde debes responder a todas las preguntas antes de que se acabe el tiempo. Al final del examen, se mostrará la puntuación total. ¿Habrás conseguido el aprobado?
-- **Fiesta**: Un modo de juego competitivo inspirado en Kahoot, con jugadores simulados, tiempo limitado y puntuación por rapidez.
+- **Fiesta**: Un modo multijugador online real con salas de seis cifras, enlace de invitación, preguntas sincronizadas, temporizador autoritativo y clasificación compartida. El servidor de desarrollo se inicia con `pnpm run dev`; para producción usa `pnpm run build` y `pnpm run start`.
 - **CLI**: Un modo de juego en la terminal, donde puedes jugar a preguntas y respuestas en un entorno de línea de comandos. Ideal para aquellos que prefieren una experiencia más técnica.
 
 ## 📜 Contribuciones

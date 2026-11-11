@@ -24,7 +24,7 @@ export default function PlayPage() {
       title: "Modo Fiesta",
       description: "Compite con amigos por puntos en tiempo real",
       icon: <Users className="h-10 w-10 text-pink-500" />,
-      href: "/play/kahoot",
+      href: "/play/testWithFriends",
       color: "from-pink-500 to-rose-500",
       bgColor: "bg-pink-50",
     },

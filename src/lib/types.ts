@@ -19,4 +19,4 @@ export interface GameState {
   isFinished: boolean
 }
 
-export type GameMode = "study" | "exam" | "kahoot" | "cli"
+export type GameMode = "study" | "exam" | "testWithFriends" | "cli"

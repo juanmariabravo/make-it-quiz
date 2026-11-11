@@ -6,7 +6,8 @@ En este documento encontrarás una lista de tareas pendientes y mejoras que se p
 
 - [ ] Completar el desarrollo de las funcionalidades básicas de los 4 modos de juego. Por hacer queda:
 - [x] Modo CLI
-- [x] Modo Fiesta (antes Kahoot)
+- [x] Modo Fiesta (testWithFriends)
+- [x] Modo Fiesta multijugador real mediante WebSocket, salas y enlaces de invitación
 
 ##### Correcciones de errores
 
@@ -28,7 +29,7 @@ En este documento encontrarás una lista de tareas pendientes y mejoras que se p
 ##### Funcionalidades adicionales
 
 - [ ] Crear un menú de opciones para cada test (mal llamado categoría). También un menú de opciones por defecto para cada modo de juego, que permita cambiar el tiempo por pregunta, activar o desactivar la penalización por respuestas incorrectas, activar o desactivar la opción de cambiar respuesta, etc. Este menú debería ser accesible desde el inicio del juego y también desde el menú de pausa durante el juego.
-- [x] Adaptar el modo Kahoot y presentarlo como modo Fiesta.
+- [x] Crear testWithFriends y presentarlo como modo Fiesta.
 - [ ] Modo "Adivina la respuesta" (pregunta con opciones múltiples).
 - [ ] Modo "Completa la frase" (pregunta con una palabra o frase a completar).
 - [ ] Modo "Ordena las respuestas" (pregunta con varias respuestas que deben ordenarse).
