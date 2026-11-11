@@ -101,12 +101,13 @@ export default function StudyModePage() {
         isFinished: true,
       })
     } else {
+      const nextAnswer = gameState.answers[nextIndex]
       setGameState({
         ...gameState,
         currentQuestion: nextIndex,
       })
-      setSelectedOption(null)
-      setShowFeedback(false)
+      setSelectedOption(nextAnswer === -1 ? null : nextAnswer)
+      setShowFeedback(nextAnswer !== -1 && !allowAnswerChanges)
     }
   }
 

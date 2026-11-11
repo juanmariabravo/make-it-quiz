@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, BookOpen, Clock, Sparkles, Terminal, Users } from "lucide-react"
+import { ArrowRight, BookOpen, Clock, Sparkles, Terminal } from "lucide-react"
 
 export default function PlayPage() {
   const gameModes = [
@@ -19,14 +19,6 @@ export default function PlayPage() {
       href: "/play/exam",
       color: "from-[#ffec99] to-[#ff8787]",
       bgColor: "bg-[#ffec99]/20",
-    },
-    {
-      title: "Modo Fiesta",
-      description: "Compite con amigos por puntos en tiempo real",
-      icon: <Users className="h-10 w-10 text-pink-500" />,
-      href: "/play/testWithFriends",
-      color: "from-[#ff8787] to-[#f06595]",
-      bgColor: "bg-[#ff8787]/15",
     },
     {
       title: "Modo CLI",

@@ -23,12 +23,6 @@ const modes = [
     icon: "⏱️",
   },
   {
-    name: "testWithFriends",
-    description: "Compite en una sala online con tus amigos.",
-    color: "bg-[#a5d8ff]",
-    icon: "🎉",
-  },
-  {
     name: "CLI",
     description: "Juega desde la terminal con una experiencia directa.",
     color: "bg-[#ffec99]",
@@ -147,9 +141,9 @@ export default function Home() {
             <div className="relative">
               <Users className="mx-auto mb-4 h-8 w-8" />
               <h2 className="text-3xl font-black sm:text-4xl">¿Tienes un grupo preparado?</h2>
-              <p className="mx-auto mt-3 max-w-xl text-white/70 dark:text-black/60">Crea una sala de testWithFriends, comparte el código y empezad a jugar.</p>
+              <p className="mx-auto mt-3 max-w-xl text-white/70 dark:text-black/60">Crea un test personalizado y empieza a jugar con tus propias preguntas.</p>
               <Button asChild size="lg" className="mt-7 rounded-full bg-white px-7 text-black hover:bg-white/85 dark:bg-black dark:text-white dark:hover:bg-black/80">
-                <Link href="/play/testWithFriends">Crear una sala</Link>
+                <Link href="/tests">Personalizar mi test</Link>
               </Button>
             </div>
           </div>

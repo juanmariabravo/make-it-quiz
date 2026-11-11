@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -27,9 +27,6 @@ export default function ExamModePage() {
   const [examDuration, setExamDuration] = useState(0)
   const [secondsPerQuestion, setSecondsPerQuestion] = useState(30)
 
-  // Usar un ref para rastrear si estamos cambiando de pregunta
-  const isChangingQuestion = useRef(false)
-
   useEffect(() => {
     async function fetchCategories() {
       try {
@@ -45,13 +42,12 @@ export default function ExamModePage() {
     fetchCategories()
   }, [])
 
-  // Efecto para limpiar la selección cuando cambia la pregunta actual
+  // Restaurar la respuesta guardada al navegar entre preguntas.
   useEffect(() => {
-    if (isChangingQuestion.current) {
-      setSelectedOption(null)
-      isChangingQuestion.current = false
-    }
-  }, [gameState.currentQuestion])
+    if (!selectedCategory) return
+    const answer = gameState.answers[gameState.currentQuestion]
+    setSelectedOption(answer === -1 ? null : answer)
+  }, [gameState.currentQuestion, gameState.answers, selectedCategory])
 
   const startQuiz = (category: QuizCategory) => {
     // Calcular duración del examen: 30 segundos por pregunta
@@ -71,6 +67,11 @@ export default function ExamModePage() {
 
   const handleOptionSelect = (optionIndex: number) => {
     setSelectedOption(optionIndex)
+    setGameState((previous) => {
+      const answers = [...previous.answers]
+      answers[previous.currentQuestion] = optionIndex
+      return { ...previous, answers }
+    })
   }
 
   const submitAnswer = () => {
@@ -82,9 +83,6 @@ export default function ExamModePage() {
     const nextQuestion = gameState.currentQuestion + 1
     const isLastQuestion = nextQuestion >= selectedCategory.questions.length
 
-    // Marcar que estamos cambiando de pregunta
-    isChangingQuestion.current = !isLastQuestion
-
     // Actualizar el estado del juego
     setGameState((prevState) => ({
       ...prevState,
@@ -94,8 +92,8 @@ export default function ExamModePage() {
 
     // Limpiar la selección al avanzar a la siguiente pregunta
     if (!isLastQuestion) {
-      setSelectedOption(null)
-      //console.log("Avanzando a la siguiente pregunta:", nextQuestion)
+      const nextAnswer = newAnswers[nextQuestion]
+      setSelectedOption(nextAnswer === -1 ? null : nextAnswer)
     }
 
     // Si es la última pregunta, finalizar el examen
@@ -110,22 +108,11 @@ export default function ExamModePage() {
     const prevIndex = gameState.currentQuestion - 1
     const prevAnswer = gameState.answers[prevIndex]
 
-    // Marcar que estamos cambiando de pregunta
-    isChangingQuestion.current = true
-
     setGameState({
       ...gameState,
       currentQuestion: prevIndex,
     })
-
-    // Cargar la respuesta anterior si existe (después del cambio de pregunta)
-    setTimeout(() => {
-      if (prevAnswer !== -1) {
-        setSelectedOption(prevAnswer)
-      } else {
-        setSelectedOption(null) // <-- Añade esto para limpiar si no hay respuesta previa
-      }
-    }, 0)
+    setSelectedOption(prevAnswer === -1 ? null : prevAnswer)
   }
 
   const finishExam = useCallback(
@@ -392,17 +379,18 @@ export default function ExamModePage() {
           </CardHeader>
           <CardContent>
             <RadioGroup
+              key={`question-${gameState.currentQuestion}`}
               value={selectedOption !== null ? selectedOption.toString() : ""}
               onValueChange={(value) => handleOptionSelect(Number.parseInt(value))}
               className="space-y-3"
             >
               {currentQuestion.options.map((option, index) => (
               <Label
-                key={index}
-                htmlFor={`option-${index}`}
+                key={`${gameState.currentQuestion}-${index}`}
+                htmlFor={`question-${gameState.currentQuestion}-option-${index}`}
                 className="flex items-center space-x-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 flex-1 cursor-pointer"
               >
-                <RadioGroupItem value={index.toString()} id={`option-${index}`} />
+                <RadioGroupItem value={index.toString()} id={`question-${gameState.currentQuestion}-option-${index}`} />
                 <span className="flex-1">{option}</span>
               </Label>
               ))}

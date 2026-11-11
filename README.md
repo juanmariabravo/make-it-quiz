@@ -1,9 +1,9 @@
 # make-it-quiz - Tus preguntas, tu juego
-Herramienta para crear y jugar tests interactivos **personalizados** con múltiples modos de juego (estudio, CLI, examen y Fiesta)
+Herramienta para crear y jugar tests interactivos **personalizados** con modos de estudio, examen y CLI.
 
 ## 🚀 Características  
 - Añade preguntas en TXT/JSON (ver [Formato de preguntas](data\README.md)).
-- Modos de juego: Estudio, Examen (contrarreloj), Fiesta, CLI-Terminal.
+- Modos de juego: Estudio, Examen (contrarreloj) y CLI-Terminal.
 - Fácil contribución: ¡Añade tus bancos de preguntas!  
 
 ## 📦 Instalación  
@@ -41,7 +41,6 @@ pnpm run dev
 En primer lugar, selecciona el modo de juego que deseas. Puedes elegir entre:
 - **Estudio**: Un modo de juego más relajado, donde puedes estudiar las preguntas a tu ritmo y comprobar si has acertado tras contestar cada una. Se irá contando la puntuación.
 - **Examen**: Un modo de juego contrarreloj, donde debes responder a todas las preguntas antes de que se acabe el tiempo. Al final del examen, se mostrará la puntuación total. ¿Habrás conseguido el aprobado?
-- **Fiesta**: Un modo multijugador online real con salas de seis cifras, enlace de invitación, preguntas sincronizadas, temporizador autoritativo y clasificación compartida. El servidor de desarrollo se inicia con `pnpm run dev`; para producción usa `pnpm run build` y `pnpm run start`.
 - **CLI**: Un modo de juego en la terminal, donde puedes jugar a preguntas y respuestas en un entorno de línea de comandos. Ideal para aquellos que prefieren una experiencia más técnica.
 
 ## 📜 Contribuciones
