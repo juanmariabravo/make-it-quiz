@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { calculateQuizScore, countCorrectAnswers, loadQuizCategories } from "@/lib/quiz-data"
 import type { QuizCategory, GameState } from "@/lib/types"
-import { ArrowLeft, Terminal } from "lucide-react"
+import { ArrowLeft, Maximize2, Minimize2, Terminal } from "lucide-react"
 
 export default function CliModePage() {
   const router = useRouter()
@@ -25,7 +25,32 @@ export default function CliModePage() {
   const [userInput, setUserInput] = useState("")
   const [waitingForInput, setWaitingForInput] = useState(false)
   const [showPrompt, setShowPrompt] = useState(true)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   const terminalRef = useRef<HTMLDivElement>(null)
+  const fullscreenRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement === fullscreenRef.current)
+    }
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange)
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange)
+  }, [])
+
+  const toggleFullscreen = async () => {
+    if (!fullscreenRef.current) return
+
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen()
+      } else {
+        await fullscreenRef.current.requestFullscreen()
+      }
+    } catch (error) {
+      console.error("No se pudo cambiar el modo de pantalla completa:", error)
+    }
+  }
 
   useEffect(() => {
     async function fetchCategories() {
@@ -303,7 +328,7 @@ export default function CliModePage() {
 
   if (!selectedCategory) {
     return (
-      <div className="container mx-auto px-4 py-12">
+      <div className={`${isFullscreen ? "flex min-h-screen items-center bg-gray-950 p-4 sm:p-8" : "container mx-auto px-4 py-12"}`}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold">Modo CLI</h1>
@@ -351,20 +376,34 @@ export default function CliModePage() {
           <div className="text-sm text-muted-foreground">{selectedCategory.name} • Modo CLI</div>
         </div>
 
-        <Card className="border-2 border-emerald-500/20">
+        <div ref={fullscreenRef} className={isFullscreen ? "mx-auto w-full max-w-6xl rounded-xl bg-gray-950 p-4 sm:p-8" : undefined}>
+        <Card className={`border-2 border-emerald-500/20 ${isFullscreen ? "shadow-2xl" : ""}`}>
           <CardHeader className="flex flex-row items-center justify-between py-2 px-4 bg-black text-white">
             <div className="flex items-center gap-2">
               <Terminal className="h-4 w-4" />
               <CardTitle className="text-sm font-mono">make-it-quiz-cli</CardTitle>
             </div>
-            <div className="flex gap-1.5">
+            <div className="flex items-center gap-3">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={toggleFullscreen}
+                className="h-7 w-7 text-white hover:bg-white/15 hover:text-white"
+                aria-label={isFullscreen ? "Salir de pantalla completa" : "Ver en pantalla completa"}
+                title={isFullscreen ? "Salir de pantalla completa" : "Ver en pantalla completa"}
+              >
+                {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+              </Button>
+              <div className="flex gap-1.5">
               <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              </div>
             </div>
           </CardHeader>
           <CardContent className="p-0">
-            <div ref={terminalRef} className="bg-black text-green-400 font-mono text-sm p-4 h-[400px] overflow-y-auto">
+            <div ref={terminalRef} className={`bg-black text-green-400 font-mono text-sm p-4 overflow-y-auto ${isFullscreen ? "h-[calc(100vh-7rem)]" : "h-[400px]"}`}>
               {terminalLines.map((line, index) => (
                 <div key={index} className="whitespace-pre-wrap">
                   {line}
@@ -393,6 +432,7 @@ export default function CliModePage() {
             </div>
           </CardFooter>
         </Card>
+        </div>
       </div>
     </div>
   )

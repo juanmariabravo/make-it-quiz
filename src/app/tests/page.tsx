@@ -224,16 +224,21 @@ export default function TestsPage() {
   const claudeUrl = `https://claude.ai/new?q=${encodeURIComponent(aiPrompt(importText))}`
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-10">
+    <main className="container mx-auto max-w-5xl px-4 py-10 md:py-14">
       <Button variant="outline" onClick={() => router.push("/play")} className="mb-6 gap-2">
         <ArrowLeft className="h-4 w-4" /> Volver a jugar
       </Button>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">Crear o importar un test</h1>
-        <p className="mt-2 text-muted-foreground">Tus tests se guardan en este navegador y aparecen en todos los modos.</p>
+      <div className="mb-8 rounded-3xl border border-black/10 bg-card/80 p-6 shadow-sm dark:border-white/10 md:p-8">
+        <div className="flex items-start gap-4">
+          <div className="rounded-2xl bg-[#ffec99] p-3 text-2xl">🧩</div>
+          <div>
+            <h1 className="text-3xl font-black tracking-tight">Personaliza tus tests</h1>
+            <p className="mt-2 text-muted-foreground">Crea desde cero o importa tus preguntas. Todo queda guardado en este navegador.</p>
+          </div>
+        </div>
       </div>
 
-      <Card className="mb-6">
+      <Card className="mb-6 overflow-hidden border-black/10 shadow-sm dark:border-white/10">
         <CardHeader><CardTitle>Tests existentes</CardTitle></CardHeader>
         <CardContent className="space-y-3">
           {categories.length === 0 && <p className="text-sm text-muted-foreground">Cargando tests...</p>}
@@ -262,7 +267,7 @@ export default function TestsPage() {
         </CardContent>
       </Card>
 
-      <div className="mb-6 flex gap-2">
+      <div className="mb-6 flex gap-2 rounded-2xl border border-black/10 bg-card/70 p-2 dark:border-white/10">
         <Button variant={mode === "create" ? "default" : "outline"} onClick={() => setMode("create")}>Crear test</Button>
         <Button variant={mode === "import" ? "default" : "outline"} onClick={() => setMode("import")}>Importar test</Button>
       </div>
@@ -344,6 +349,6 @@ export default function TestsPage() {
           {message && <p className="rounded-md bg-muted p-3 text-sm">{message}</p>}
         </CardContent>
       </Card>
-    </div>
+    </main>
   )
 }
