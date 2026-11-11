@@ -21,7 +21,7 @@ export default function PlayPage() {
       bgColor: "bg-orange-50",
     },
     {
-      title: "Modo Kahoot",
+      title: "Modo Fiesta",
       description: "Compite con amigos por puntos en tiempo real",
       icon: <Users className="h-10 w-10 text-pink-500" />,
       href: "/play/kahoot",
@@ -72,6 +72,9 @@ export default function PlayPage() {
         </div>
 
         <div className="mt-8 text-center">
+          <Link href="/tests" className="mr-4 text-purple-600 hover:text-purple-800 font-medium">
+            Crear o importar test
+          </Link>
           <Link href="/" className="text-purple-600 hover:text-purple-800 font-medium">
             ← Volver al inicio
           </Link>

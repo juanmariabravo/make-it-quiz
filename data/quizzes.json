@@ -1,0 +1,487 @@
+[
+  {
+    "id": "culturageneral",
+    "name": "culturageneral",
+    "questions": [
+      {
+        "question": "¿Cuál es la capital de Francia?",
+        "options": [
+          "París",
+          "Londres",
+          "Berlín",
+          "Madrid"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿Quién pintó la Mona Lisa?",
+        "options": [
+          "Leonardo da Vinci",
+          "Pablo Picasso",
+          "Vincent van Gogh",
+          "Claude Monet"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿En qué continente se encuentra Egipto?",
+        "options": [
+          "Asia",
+          "África",
+          "Europa",
+          "Oceanía"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es el río más largo del mundo?",
+        "options": [
+          "Amazonas",
+          "Nilo",
+          "Yangtsé",
+          "Misisipi"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Quién escribió \"Cien años de soledad\"?",
+        "options": [
+          "Mario Vargas Llosa",
+          "Gabriel García Márquez",
+          "Julio Cortázar",
+          "Isabel Allende"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿En qué año llegó el hombre a la Luna?",
+        "options": [
+          "1965",
+          "1969",
+          "1972",
+          "1959"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es el elemento químico con símbolo O?",
+        "options": [
+          "Oro",
+          "Oxígeno",
+          "Osmio",
+          "Oxalato"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Quién fue el primer presidente de Estados Unidos?",
+        "options": [
+          "Abraham Lincoln",
+          "Thomas Jefferson",
+          "George Washington",
+          "John Adams"
+        ],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "¿En qué país se encuentra la Torre de Pisa?",
+        "options": [
+          "Francia",
+          "Italia",
+          "España",
+          "Grecia"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es el océano más grande del mundo?",
+        "options": [
+          "Atlántico",
+          "Índico",
+          "Pacífico",
+          "Ártico"
+        ],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "¿Quién es el autor de \"Don Quijote de la Mancha\"?",
+        "options": [
+          "Miguel de Cervantes",
+          "Lope de Vega",
+          "Federico García Lorca",
+          "Gustavo Adolfo Bécquer"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿En qué ciudad se encuentra el Coliseo?",
+        "options": [
+          "Atenas",
+          "Roma",
+          "París",
+          "Estambul"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es el planeta más grande del sistema solar?",
+        "options": [
+          "Saturno",
+          "Júpiter",
+          "Marte",
+          "Venus"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Quién descubrió América?",
+        "options": [
+          "Cristóbal Colón",
+          "Hernán Cortés",
+          "Vasco da Gama",
+          "Fernando de Magallanes"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿En qué país nació el tango?",
+        "options": [
+          "Brasil",
+          "Argentina",
+          "México",
+          "Chile"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es la moneda oficial de Japón?",
+        "options": [
+          "Yuan",
+          "Yen",
+          "Won",
+          "Dólar"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Quién escribió \"Romeo y Julieta\"?",
+        "options": [
+          "William Shakespeare",
+          "Charles Dickens",
+          "Jane Austen",
+          "Oscar Wilde"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿En qué año terminó la Segunda Guerra Mundial?",
+        "options": [
+          "1942",
+          "1945",
+          "1950",
+          "1939"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Cuál es el país más grande del mundo?",
+        "options": [
+          "Canadá",
+          "China",
+          "Rusia",
+          "Estados Unidos"
+        ],
+        "answer": 2,
+        "points": 2
+      },
+      {
+        "question": "¿Quién fue el creador de la teoría de la relatividad?",
+        "options": [
+          "Isaac Newton",
+          "Albert Einstein",
+          "Galileo Galilei",
+          "Nikola Tesla"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿En qué continente está Brasil?",
+        "options": [
+          "África",
+          "América",
+          "Europa",
+          "Oceanía"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿En qué ciudad se encuentra la Sagrada Familia?",
+        "options": [
+          "Madrid",
+          "Barcelona",
+          "Valencia",
+          "Sevilla"
+        ],
+        "answer": 1,
+        "points": 2
+      }
+    ]
+  },
+  {
+    "id": "musica",
+    "name": "musica",
+    "questions": [
+      {
+        "question": "¿Quién es conocido como el 'Rey del Pop'?",
+        "options": [
+          "Elvis Presley",
+          "Michael Jackson",
+          "Prince",
+          "Freddie Mercury"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Qué banda británica lanzó el álbum 'Abbey Road'?",
+        "options": [
+          "The Rolling Stones",
+          "The Beatles",
+          "Queen",
+          "Pink Floyd"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Cuál es el nombre real de la cantante Lady Gaga?",
+        "options": [
+          "Stefani Germanotta",
+          "Alicia Keys",
+          "Robyn Fenty",
+          "Adele Adkins"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿Qué compositor es famoso por su Novena Sinfonía?",
+        "options": [
+          "Mozart",
+          "Beethoven",
+          "Bach",
+          "Chopin"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Quién canta la canción 'Shape of You'?",
+        "options": [
+          "Ed Sheeran",
+          "Justin Bieber",
+          "Shawn Mendes",
+          "Sam Smith"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿En qué país nació el reggaetón?",
+        "options": [
+          "Puerto Rico",
+          "Colombia",
+          "Cuba",
+          "México"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿Cuál es el nombre del álbum debut de Rosalía?",
+        "options": [
+          "El Mal Querer",
+          "Los Ángeles",
+          "Motomami",
+          "F*cking Money Man"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Qué instrumento toca Yo-Yo Ma?",
+        "options": [
+          "Violín",
+          "Piano",
+          "Violonchelo",
+          "Guitarra"
+        ],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "¿Quién es el líder de la banda U2?",
+        "options": [
+          "Bono",
+          "The Edge",
+          "Adam Clayton",
+          "Larry Mullen Jr."
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿Qué artista popularizó el 'moonwalk'?",
+        "options": [
+          "James Brown",
+          "Michael Jackson",
+          "Usher",
+          "Chris Brown"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Cuál es el género musical de AC/DC?",
+        "options": [
+          "Pop",
+          "Rock",
+          "Jazz",
+          "Reggae"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Qué cantante española ganó Eurovisión en 1968?",
+        "options": [
+          "Rocío Jurado",
+          "Massiel",
+          "Lola Flores",
+          "Isabel Pantoja"
+        ],
+        "answer": 1,
+        "points": 2
+      },
+      {
+        "question": "¿Quién compuso 'Bohemian Rhapsody'?",
+        "options": [
+          "Brian May",
+          "Freddie Mercury",
+          "Roger Taylor",
+          "John Deacon"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Qué rapero lanzó el álbum 'DAMN.' en 2017?",
+        "options": [
+          "Drake",
+          "Kendrick Lamar",
+          "J. Cole",
+          "Kanye West"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Cuál es el nombre artístico de Abel Tesfaye?",
+        "options": [
+          "The Weeknd",
+          "Drake",
+          "Post Malone",
+          "Frank Ocean"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿Qué grupo español canta 'La Flaca'?",
+        "options": [
+          "Estopa",
+          "Jarabe de Palo",
+          "El Canto del Loco",
+          "La Oreja de Van Gogh"
+        ],
+        "answer": 1,
+        "points": 1
+      },
+      {
+        "question": "¿Quién es la voz principal de Coldplay?",
+        "options": [
+          "Chris Martin",
+          "Jonny Buckland",
+          "Guy Berryman",
+          "Will Champion"
+        ],
+        "answer": 0,
+        "points": 2
+      },
+      {
+        "question": "¿Qué cantante lanzó el álbum 'Future Nostalgia'?",
+        "options": [
+          "Dua Lipa",
+          "Ariana Grande",
+          "Billie Eilish",
+          "Taylor Swift"
+        ],
+        "answer": 0,
+        "points": 1
+      },
+      {
+        "question": "¿En qué década surgió el movimiento grunge?",
+        "options": [
+          "Años 60",
+          "Años 70",
+          "Años 80",
+          "Años 90"
+        ],
+        "answer": 3,
+        "points": 1
+      },
+      {
+        "question": "¿Qué compositor español es famoso por su obra 'Concierto de Aranjuez'?",
+        "options": [
+          "Isaac Albéniz",
+          "Enrique Granados",
+          "Joaquín Rodrigo",
+          "Manuel de Falla"
+        ],
+        "answer": 2,
+        "points": 1
+      },
+      {
+        "question": "¿Quién interpreta la canción 'Bad Guy'?",
+        "options": [
+          "Billie Eilish",
+          "Lorde",
+          "Halsey",
+          "Selena Gomez"
+        ],
+        "answer": 0,
+        "points": 1
+      }
+    ]
+  }
+]

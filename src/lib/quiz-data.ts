@@ -1,5 +1,7 @@
 import type { Question, QuizCategory } from "./types"
 
+export const CUSTOM_QUIZZES_STORAGE_KEY = "make-it-quiz.custom-quizzes"
+
 // Ejemplo de categorías y preguntas para demostración
 export const sampleCategories: QuizCategory[] = [
   {
@@ -58,7 +60,28 @@ export const sampleCategories: QuizCategory[] = [
 export async function loadQuizCategories(): Promise<QuizCategory[]> {
   const response = await fetch('/quizzes.json')
   if (!response.ok) throw new Error('Failed to load quizzes')
-  return await response.json()
+  const categories = (await response.json()) as QuizCategory[]
+
+  if (typeof window === "undefined") return categories
+
+  try {
+    const stored = window.localStorage.getItem(CUSTOM_QUIZZES_STORAGE_KEY)
+    if (!stored) return categories
+    const customCategories = JSON.parse(stored) as QuizCategory[]
+    return [...categories, ...customCategories]
+  } catch {
+    return categories
+  }
+}
+
+export function saveCustomQuiz(category: QuizCategory): void {
+  const stored = window.localStorage.getItem(CUSTOM_QUIZZES_STORAGE_KEY)
+  const categories = stored ? (JSON.parse(stored) as QuizCategory[]) : []
+  const withoutPreviousVersion = categories.filter((item) => item.id !== category.id)
+  window.localStorage.setItem(
+    CUSTOM_QUIZZES_STORAGE_KEY,
+    JSON.stringify([...withoutPreviousVersion, category]),
+  )
 }
 
 // Función para parsear preguntas desde formato TXT
@@ -113,9 +136,22 @@ export function parseJsonQuestions(jsonContent: string): Question[] {
         points: q.points || 1,
       }))
     }
+
     return []
   } catch (error) {
     console.error("Error parsing JSON questions:", error)
     return []
   }
+}
+
+export function calculateQuizScore(questions: Question[], answers: number[]): number {
+  return questions.reduce((score, question, index) => {
+    return answers[index] === question.answer ? score + (question.points || 1) : score
+  }, 0)
+}
+
+export function countCorrectAnswers(questions: Question[], answers: number[]): number {
+  return questions.reduce((correct, question, index) => {
+    return answers[index] === question.answer ? correct + 1 : correct
+  }, 0)
 }

@@ -27,7 +27,7 @@ export default function Home() {
               <div className="flex flex-col items-center p-3 rounded-lg bg-purple-100/10 border border-purple-500/20">
                 <span className="text-3xl mb-2">🎮</span>
                 <h3 className="font-semibold">Múltiples modos</h3>
-                <p className="text-sm text-muted-foreground">Estudio, Examen, Kahoot, CLI</p>
+                <p className="text-sm text-muted-foreground">Estudio, Examen, Fiesta, CLI</p>
               </div>
             </div>
           </div>

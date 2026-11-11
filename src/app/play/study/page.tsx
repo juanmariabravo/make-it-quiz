@@ -25,6 +25,7 @@ export default function StudyModePage() {
   const [isLoading, setIsLoading] = useState(true)
   const [penalizacion, setPenalizacion] = useState(false)
   const [penalizacionValor, setPenalizacionValor] = useState(0.33)
+  const [allowAnswerChanges, setAllowAnswerChanges] = useState(false)
 
   useEffect(() => {
     async function fetchCategories() {
@@ -57,15 +58,23 @@ export default function StudyModePage() {
 
   const submitAnswer = () => {
     if (selectedOption === null || !selectedCategory) return
+    if (gameState.answers[gameState.currentQuestion] !== -1 && !allowAnswerChanges) return
 
     const currentQuestion = selectedCategory.questions[gameState.currentQuestion]
     const isCorrect = selectedOption === currentQuestion.answer
     const points = currentQuestion.points || 1
+    const previousOption = gameState.answers[gameState.currentQuestion]
+    const wasPreviouslyCorrect = previousOption === currentQuestion.answer
 
     const newAnswers = [...gameState.answers]
     newAnswers[gameState.currentQuestion] = selectedOption
 
     let newScore = gameState.score
+    if (previousOption !== -1 && wasPreviouslyCorrect) {
+      newScore -= points
+    } else if (previousOption !== -1 && penalizacion && previousOption !== currentQuestion.answer) {
+      newScore += penalizacionValor
+    }
     if (isCorrect) {
       newScore += points
     } else if (penalizacion) {
@@ -109,8 +118,9 @@ export default function StudyModePage() {
       currentQuestion: gameState.currentQuestion - 1,
     })
 
-    setSelectedOption(gameState.answers[gameState.currentQuestion - 1])
-    setShowFeedback(true)
+    const answer = gameState.answers[gameState.currentQuestion - 1]
+    setSelectedOption(answer === -1 ? null : answer)
+    setShowFeedback(answer !== -1 && !allowAnswerChanges)
   }
 
   const restartQuiz = () => {
@@ -184,6 +194,18 @@ export default function StudyModePage() {
                 </CardFooter>
               </Card>
             ))}
+          </div>
+          <div className="mt-6 flex flex-wrap items-center gap-2 rounded-lg border p-4">
+            <input
+              type="checkbox"
+              id="allow-answer-changes"
+              checked={allowAnswerChanges}
+              onChange={(event) => setAllowAnswerChanges(event.target.checked)}
+              className="accent-purple-600"
+            />
+            <label htmlFor="allow-answer-changes" className="text-sm">
+              Permitir cambiar una respuesta ya contestada
+            </label>
           </div>
         </div>
       </div>
@@ -279,7 +301,7 @@ export default function StudyModePage() {
               value={selectedOption?.toString()}
               onValueChange={(value) => handleOptionSelect(Number.parseInt(value))}
               className="space-y-3"
-              disabled={showFeedback}
+              disabled={showFeedback && !allowAnswerChanges}
             >
               {currentQuestion.options.map((option, index) => (
                 <Label
@@ -330,7 +352,7 @@ export default function StudyModePage() {
               Anterior
             </Button>
 
-            {!showFeedback ? (
+            {!showFeedback || allowAnswerChanges ? (
               <Button
                 onClick={submitAnswer}
                 disabled={selectedOption === null}

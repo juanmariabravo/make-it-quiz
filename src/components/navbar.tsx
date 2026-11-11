@@ -26,6 +26,9 @@ export function Navbar() {
                 <Link href="/play" className="text-lg font-medium">
                   Jugar
                 </Link>
+                <Link href="/tests" className="text-lg font-medium">
+                  Crear test
+                </Link>
                 <Link
                   href="https://github.com/juanmariabravo/make-it-quiz"
                   target="_blank"
@@ -51,6 +54,9 @@ export function Navbar() {
           </Link>
           <Link href="/play" className="text-sm font-medium transition-colors hover:text-primary">
             Jugar
+          </Link>
+          <Link href="/tests" className="text-sm font-medium transition-colors hover:text-primary">
+            Crear test
           </Link>
         </nav>
 

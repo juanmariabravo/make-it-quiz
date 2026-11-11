@@ -76,7 +76,7 @@ def main():
     with open(output_file, 'w+', encoding='utf-8') as f:
         json.dump(categories, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ Generated {output_file} with {len(categories)} categories")
+    print(f"Generated {output_file} with {len(categories)} categories")
 
 if __name__ == '__main__':
     main()

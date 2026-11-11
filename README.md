@@ -1,9 +1,9 @@
 # make-it-quiz - Tus preguntas, tu juego
-Herramienta para crear y jugar tests interativos **personalizados** con múltiples modos de juego (estudio, CLI, examen, Kahoot-like)
+Herramienta para crear y jugar tests interactivos **personalizados** con múltiples modos de juego (estudio, CLI, examen y Fiesta)
 
 ## 🚀 Características  
 - Añade preguntas en TXT/JSON (ver [Formato de preguntas](data\README.md)).
-- Modos de juego: Estudio, Examen (contrarreloj), Kahoot, CLI-Terminal.  
+- Modos de juego: Estudio, Examen (contrarreloj), Fiesta, CLI-Terminal.
 - Fácil contribución: ¡Añade tus bancos de preguntas!  
 
 ## 📦 Instalación  
@@ -25,12 +25,14 @@ node -v
 ## 🛠️ Uso del dev
 ```shell
 cd src
-npm install # o npm install --legacy-peer-deps en caso de problemas con dependencias
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## 🆕 Crear o añadir mis propias preguntas
 - Puedes añadir tus preguntas en formato JSON o TXT, pero **debes seguir el formato correcto** (ver [Formato de preguntas](data\README.md)).
+- Desde la aplicación puedes usar **Crear test** para crear preguntas manualmente o importar un archivo JSON/TXT. Los tests creados se guardan en el navegador y aparecen automáticamente en todos los modos de juego. La pantalla de importación permite descargar una plantilla JSON.
+- Si el test tiene otro formato, la pantalla de importación genera un prompt con la plantilla y permite abrirlo directamente en ChatGPT para convertirlo a JSON compatible.
 - Cada archivo puede contener varias preguntas, y puedes crear tantos archivos como quieras.
 - Cada archivo aparecerá en el juego como una categoría diferente, que se podrá seleccionar al inicio del juego.
 %% Mostrar captura de archivos (uno de cada tipo) y su contenido. Mostrar cómo se ven en el juego (selección de categorías).
@@ -39,7 +41,7 @@ npm run dev
 En primer lugar, selecciona el modo de juego que deseas. Puedes elegir entre:
 - **Estudio**: Un modo de juego más relajado, donde puedes estudiar las preguntas a tu ritmo y comprobar si has acertado tras contestar cada una. Se irá contando la puntuación.
 - **Examen**: Un modo de juego contrarreloj, donde debes responder a todas las preguntas antes de que se acabe el tiempo. Al final del examen, se mostrará la puntuación total. ¿Habrás conseguido el aprobado?
-- **Kahoot**: Un modo de juego similar a Kahoot, donde puedes jugar con amigos y competir por puntos. El que primero conteste correctamente a la pregunta, ganará más puntos.
+- **Fiesta**: Un modo de juego competitivo inspirado en Kahoot, con jugadores simulados, tiempo limitado y puntuación por rapidez.
 - **CLI**: Un modo de juego en la terminal, donde puedes jugar a preguntas y respuestas en un entorno de línea de comandos. Ideal para aquellos que prefieren una experiencia más técnica.
 
 ## 📜 Contribuciones

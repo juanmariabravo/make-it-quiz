@@ -25,6 +25,7 @@ export default function ExamModePage() {
   const [selectedOption, setSelectedOption] = useState<number | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [examDuration, setExamDuration] = useState(0)
+  const [secondsPerQuestion, setSecondsPerQuestion] = useState(30)
 
   // Usar un ref para rastrear si estamos cambiando de pregunta
   const isChangingQuestion = useRef(false)
@@ -54,7 +55,7 @@ export default function ExamModePage() {
 
   const startQuiz = (category: QuizCategory) => {
     // Calcular duración del examen: 30 segundos por pregunta
-    const duration = category.questions.length * 30
+    const duration = category.questions.length * secondsPerQuestion
 
     setSelectedCategory(category)
     setGameState({
@@ -156,7 +157,7 @@ export default function ExamModePage() {
   const restartQuiz = () => {
     if (!selectedCategory) return
 
-    const duration = selectedCategory.questions.length * 30
+    const duration = selectedCategory.questions.length * secondsPerQuestion
 
     setGameState({
       currentQuestion: 0,
@@ -235,6 +236,21 @@ export default function ExamModePage() {
               Volver a modos de juego
             </Button>
           </div>
+          <div className="mb-6 flex items-center gap-3 rounded-lg border p-4">
+            <label htmlFor="seconds-per-question" className="text-sm font-medium">
+              Segundos por pregunta
+            </label>
+            <input
+              id="seconds-per-question"
+              type="number"
+              min="5"
+              max="300"
+              step="5"
+              value={secondsPerQuestion}
+              onChange={(event) => setSecondsPerQuestion(Math.max(5, Number(event.target.value) || 30))}
+              className="w-24 rounded border px-2 py-1"
+            />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {categories.map((category) => (
@@ -244,7 +260,7 @@ export default function ExamModePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    {category.questions.length} preguntas • {Math.round((category.questions.length * 30) / 60)} minutos
+                    {category.questions.length} preguntas • {formatTime(category.questions.length * secondsPerQuestion)}
                   </p>
                 </CardContent>
                 <CardFooter>

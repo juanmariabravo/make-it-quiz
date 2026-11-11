@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { loadQuizCategories } from "@/lib/quiz-data"
+import { calculateQuizScore, countCorrectAnswers, loadQuizCategories } from "@/lib/quiz-data"
 import type { QuizCategory, GameState } from "@/lib/types"
 import { ArrowLeft, Terminal } from "lucide-react"
 
@@ -64,7 +64,6 @@ export default function CliModePage() {
 
   // Al seleccionar categoría y empezar el quiz
   const startQuiz = async (category: QuizCategory) => {
-    console.log("startQuiz", category)
     setSelectedCategory(category)
     setGameState({
       currentQuestion: 0,
@@ -88,16 +87,12 @@ export default function CliModePage() {
     await addTerminalLine("Iniciando cuestionario...")
     await addTerminalLine("")
 
-    console.log("Antes de mostrar la primera pregunta")
-    // Mostrar la primera pregunta
     await showQuestion(0, category)
   }
 
   // Mostrar pregunta
   const showQuestion = async (index: number, category: QuizCategory) => {
     const question = category.questions[index]
-    console.log("showQuestion", { index, question })
-
     const questionNumber = index + 1
 
     await addTerminalLine(`Pregunta ${questionNumber}/${category.questions.length}:`)
@@ -112,20 +107,16 @@ export default function CliModePage() {
     await addTerminalLine("Introduce el número de tu respuesta (1-" + question.options.length + "):")
 
     setWaitingForInput(true)
-    console.log("showQuestion: setWaitingForInput(true)")
   }
 
   // Cuando el usuario escribe en el input
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value)
-    console.log("handleInputChange", e.target.value)
   }
 
   // Cuando el usuario envía una respuesta
   const handleInputSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("handleInputSubmit", { waitingForInput, selectedCategory, userInput })
-
     if (!waitingForInput || !selectedCategory) return
 
     const input = userInput.trim()
@@ -141,7 +132,8 @@ export default function CliModePage() {
       return
     }
 
-    const currentQuestion = selectedCategory.questions[gameState.currentQuestion]
+    const currentQuestionIndex = gameState.currentQuestion
+    const currentQuestion = selectedCategory.questions[currentQuestionIndex]
     const answerIndex = Number.parseInt(input) - 1
 
     if (isNaN(answerIndex) || answerIndex < 0 || answerIndex >= currentQuestion.options.length) {
@@ -156,13 +148,15 @@ export default function CliModePage() {
     const points = currentQuestion.points || 1
 
     const newAnswers = [...gameState.answers]
-    newAnswers[gameState.currentQuestion] = answerIndex
+    newAnswers[currentQuestionIndex] = answerIndex
 
-    setGameState({
-      ...gameState,
-      score: isCorrect ? gameState.score + points : gameState.score,
+    const newScore = calculateQuizScore(selectedCategory.questions, newAnswers)
+
+    setGameState((previous) => ({
+      ...previous,
+      score: newScore,
       answers: newAnswers,
-    })
+    }))
 
     // Mostrar resultado
     await addTerminalLine("")
@@ -176,7 +170,7 @@ export default function CliModePage() {
     await addTerminalLine("")
 
     // Avanzar a la siguiente pregunta o finalizar
-    const nextIndex = gameState.currentQuestion + 1
+    const nextIndex = currentQuestionIndex + 1
 
     if (nextIndex >= selectedCategory.questions.length) {
       finishQuiz(newAnswers)
@@ -185,16 +179,12 @@ export default function CliModePage() {
       setWaitingForInput(true)
 
       // Configurar para que la próxima entrada avance a la siguiente pregunta
-      setGameState({
-        ...gameState,
-        currentQuestion: nextIndex,
-      })
+      setGameState((previous) => ({ ...previous, currentQuestion: nextIndex }))
     }
   }
 
   // Cuando se espera continuar
   const handleContinue = async () => {
-    console.log("handleContinue", { waitingForInput, currentQuestion: gameState.currentQuestion })
     if (!selectedCategory) return
 
     setUserInput("")
@@ -210,7 +200,6 @@ export default function CliModePage() {
 
   // Al finalizar el quiz
   const finishQuiz = async (answersParam?: number[]) => {
-    console.log("finishQuiz")
     if (!selectedCategory) return
 
     setWaitingForInput(false)
@@ -218,8 +207,9 @@ export default function CliModePage() {
     const answers = answersParam ?? gameState.answers
     const totalQuestions = selectedCategory.questions.length
     const totalPoints = selectedCategory.questions.reduce((sum, q) => sum + (q.points || 1), 0)
-    const correctAnswers = answers.filter((a, i) => a === selectedCategory.questions[i].answer).length
-    const percentageScore = Math.round((gameState.score / totalPoints) * 100)
+    const correctAnswers = countCorrectAnswers(selectedCategory.questions, answers)
+    const score = calculateQuizScore(selectedCategory.questions, answers)
+    const percentageScore = totalPoints > 0 ? Math.round((score / totalPoints) * 100) : 0
 
     await addTerminalLine("┌─────────────────────────────────────┐")
     await addTerminalLine("│ Resultados del cuestionario         │")
@@ -228,7 +218,7 @@ export default function CliModePage() {
     await addTerminalLine(`Categoría: ${selectedCategory.name}`)
     await addTerminalLine(`Preguntas: ${totalQuestions}`)
     await addTerminalLine(`Correctas: ${correctAnswers}/${totalQuestions}`)
-    await addTerminalLine(`Puntuación: ${gameState.score}/${totalPoints} (${percentageScore}%)`)
+    await addTerminalLine(`Puntuación: ${score}/${totalPoints} (${percentageScore}%)`)
     await addTerminalLine("")
 
     if (percentageScore >= 80) {
@@ -247,10 +237,11 @@ export default function CliModePage() {
     await addTerminalLine("Introduce tu elección (1-2):")
 
     setWaitingForInput(true)
-    setGameState({
-      ...gameState,
+    setGameState((previous) => ({
+      ...previous,
+      score,
       isFinished: true,
-    })
+    }))
   }
 
   const handleFinishOptions = async (input: string) => {
