@@ -1,7 +1,12 @@
 // scripts/app.js
-document.getElementById("play-btn").addEventListener("click", () => {
-  window.location.href = "play.html";
-});
+
+// Only add event listener if the element exists
+const playBtn = document.getElementById("play-btn");
+if (playBtn) {
+    playBtn.addEventListener("click", () => {
+        window.location.href = "play.html";
+    });
+}
 
 // Game State
 let currentMode = null;
@@ -17,15 +22,35 @@ let questions = [];
 function toggleTheme() {
     document.body.classList.toggle('dark');
     const themeBtn = document.querySelector('.theme-toggle');
-    themeBtn.textContent = document.body.classList.contains('dark') ? '🌙' : '☀️';
+    if (themeBtn) {
+        themeBtn.textContent = document.body.classList.contains('dark') ? '🌙' : '☀️';
+    }
+
+    // Save theme preference
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
 }
+
+// Load saved theme on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark');
+        const themeBtn = document.querySelector('.theme-toggle');
+        if (themeBtn) {
+            themeBtn.textContent = '🌙';
+        }
+    }
+});
 
 // Navigation
 function showSection(sectionId) {
     document.querySelectorAll('.page').forEach(page => {
         page.classList.add('hidden');
     });
-    document.getElementById(sectionId).classList.remove('hidden');
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.classList.remove('hidden');
+    }
 }
 
 // Game Modes

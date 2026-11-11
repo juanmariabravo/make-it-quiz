@@ -1,7 +1,7 @@
 // study-mode.js
 
 // Cambia esta ruta si tus archivos están en otro sitio
-const DATA_DIR = '../data/';
+const DATA_DIR = '/data/';
 
 async function fetchCategories() {
   // No es posible leer el directorio entero directamente desde el navegador por razones de seguridad.
@@ -215,12 +215,24 @@ document.getElementById('next-question').onclick = () => {
 
 // Inicializa categorías al cargar
 window.onload = async () => {
-  const categories = await fetchCategories();
-  const select = document.getElementById('category');
-  categories.forEach(cat => {
-    const opt = document.createElement('option');
-    opt.value = cat;
-    opt.textContent = cat;
-    select.appendChild(opt);
-  });
+  try {
+    console.log('Cargando categorías...');
+    const categories = await fetchCategories();
+    console.log('Categorías cargadas:', categories);
+    const select = document.getElementById('category');
+    if (!select) {
+      console.error('No se encontró el elemento select#category');
+      return;
+    }
+    categories.forEach(cat => {
+      const opt = document.createElement('option');
+      opt.value = cat;
+      opt.textContent = cat;
+      select.appendChild(opt);
+    });
+    console.log('Categorías agregadas al select');
+  } catch (err) {
+    console.error('Error al cargar categorías:', err);
+    alert('Error al cargar categorías: ' + err.message);
+  }
 };

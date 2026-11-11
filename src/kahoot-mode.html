@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modo Kahoot - Make It Quiz</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/modes.css">
+    <link rel="stylesheet" href="styles/kahoot-mode.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">make-it-quiz</a>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="../index.html#modes">Jugar</a>
+            <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+        </nav>
+    </header>
+
+    <div class="container" style="margin-top: 100px;">
+        <!-- Category Selection -->
+        <div id="category-select" class="category-selection">
+            <div class="mode-header">
+                <div class="mode-icon">🏆</div>
+                <h1>Modo Kahoot</h1>
+                <p>Compite contra el tiempo - Cuanto más rápido respondas, más puntos ganas</p>
+            </div>
+
+            <div class="category-card">
+                <label for="category">Elige una categoría:</label>
+                <select id="category" class="category-dropdown"></select>
+
+                <div class="time-selector">
+                    <label for="time-per-question">Tiempo por pregunta:</label>
+                    <select id="time-per-question" class="category-dropdown">
+                        <option value="10">10 segundos</option>
+                        <option value="20" selected>20 segundos</option>
+                        <option value="30">30 segundos</option>
+                        <option value="45">45 segundos</option>
+                        <option value="60">60 segundos</option>
+                    </select>
+                </div>
+
+                <button id="load-category" class="btn btn-primary">¡Comenzar!</button>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div id="game-area" style="display:none;">
+            <div class="kahoot-header">
+                <div class="score-display">
+                    <div class="score-label">Puntuación</div>
+                    <div class="score-value" id="score-value">0</div>
+                </div>
+                <div class="streak-display" id="streak-display" style="display:none;">
+                    <span>🔥</span>
+                    <span id="streak-count">0</span>
+                    <span>racha</span>
+                </div>
+            </div>
+
+            <div class="timer-bar-container">
+                <div class="timer-bar" id="timer-bar"></div>
+            </div>
+
+            <div class="question-card kahoot-style">
+                <div class="question-number" id="question-number">Pregunta 1</div>
+                <div class="question-text" id="question-text"></div>
+            </div>
+
+            <div class="kahoot-answers" id="kahoot-answers"></div>
+
+            <div class="question-progress">
+                <span id="progress-text">1 / 10</span>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results-area" style="display:none;">
+            <div class="results-card kahoot-results">
+                <div class="trophy-icon">🏆</div>
+                <h2 class="results-title">¡Juego completado!</h2>
+
+                <div class="final-score-display">
+                    <div class="final-score-label">Puntuación final</div>
+                    <div class="final-score-value" id="final-score">0</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon">✓</div>
+                        <div class="stat-value" id="correct-count">0</div>
+                        <div class="stat-label">Correctas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">✗</div>
+                        <div class="stat-value" id="incorrect-count">0</div>
+                        <div class="stat-label">Incorrectas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-value" id="max-streak">0</div>
+                        <div class="stat-label">Racha máxima</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-value" id="avg-time">0s</div>
+                        <div class="stat-label">Tiempo medio</div>
+                    </div>
+                </div>
+
+                <div class="performance-message" id="performance-message"></div>
+
+                <div class="cta-buttons">
+                    <button class="btn btn-secondary" onclick="location.reload()">Jugar de nuevo</button>
+                    <button class="btn btn-primary" onclick="window.location.href='../index.html#modes'">Cambiar
+                        modo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../src/scripts/quiz-engine.js"></script>
+    <script src="../src/scripts/app.js"></script>
+    <script>
+        const engine = new QuizEngine();
+        let timePerQuestion = 20;
+        let questionStartTime = 0;
+        let score = 0;
+        let streak = 0;
+        let maxStreak = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let responseTimes = [];
+        let timerInterval = null;
+
+        // Kahoot color schemes for answers
+        const kahootColors = [
+            { bg: '#e21b3c', hover: '#c41230' },  // Red
+            { bg: '#1368ce', hover: '#0e4fa1' },  // Blue
+            { bg: '#d89e00', hover: '#b38400' },  // Yellow
+            { bg: '#26890c', hover: '#1d6909' },  // Green
+            { bg: '#9c27b0', hover: '#7b1fa2' },  // Purple
+            { bg: '#ff6f00', hover: '#e65100' },  // Orange
+        ];
+
+        // Load categories on page load
+        window.onload = async () => {
+            try {
+                const categories = await engine.loadCategories();
+                const select = document.getElementById('category');
+                categories.forEach(cat => {
+                    const opt = document.createElement('option');
+                    opt.value = cat;
+                    opt.textContent = cat.replace(/\.(txt|json)$/, '');
+                    select.appendChild(opt);
+                });
+            } catch (err) {
+                alert('Error al cargar categorías: ' + err.message);
+            }
+        };
+
+        // Load category and start game
+        document.getElementById('load-category').onclick = async () => {
+            const filename = document.getElementById('category').value;
+            timePerQuestion = parseInt(document.getElementById('time-per-question').value);
+
+            try {
+                await engine.loadQuestions(filename);
+                if (engine.questions.length === 0) {
+                    throw new Error('No se encontraron preguntas en esta categoría.');
+                }
+
+                engine.init('kahoot', filename);
+                document.getElementById('category-select').style.display = 'none';
+                document.getElementById('game-area').style.display = 'block';
+
+                score = 0;
+                streak = 0;
+                maxStreak = 0;
+                correctCount = 0;
+                incorrectCount = 0;
+                responseTimes = [];
+
+                showQuestion();
+            } catch (err) {
+                alert('Error al cargar preguntas: ' + err.message);
+            }
+        };
+
+        function showQuestion() {
+            const q = engine.getCurrentQuestion();
+            const isMulti = engine.isMultipleAnswer();
+
+            document.getElementById('question-number').textContent =
+                `Pregunta ${engine.currentQuestionIndex + 1} de ${engine.questions.length}`;
+            document.getElementById('question-text').textContent = q.question;
+            document.getElementById('progress-text').textContent =
+                `${engine.currentQuestionIndex + 1} / ${engine.questions.length}`;
+
+            // Render answers in Kahoot style
+            const container = document.getElementById('kahoot-answers');
+            container.innerHTML = '';
+
+            if (isMulti) {
+                // For multiple answers, show a message
+                const msg = document.createElement('div');
+                msg.className = 'multi-answer-warning';
+                msg.innerHTML = '⚠️ Esta pregunta tiene múltiples respuestas. En modo Kahoot solo se permiten respuestas únicas. Saltando...';
+                container.appendChild(msg);
+
+                setTimeout(() => {
+                    if (engine.nextQuestion()) {
+                        showQuestion();
+                    } else {
+                        showResults();
+                    }
+                }, 2000);
+                return;
+            }
+
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'kahoot-answer-btn';
+                const color = kahootColors[i % kahootColors.length];
+                btn.style.backgroundColor = color.bg;
+                btn.dataset.hoverColor = color.hover;
+
+                btn.onmouseenter = () => {
+                    btn.style.backgroundColor = color.hover;
+                };
+                btn.onmouseleave = () => {
+                    if (!btn.classList.contains('selected')) {
+                        btn.style.backgroundColor = color.bg;
+                    }
+                };
+
+                const shape = document.createElement('div');
+                shape.className = 'answer-shape';
+                const shapes = ['▲', '◆', '●', '■', '★', '♦'];
+                shape.textContent = shapes[i % shapes.length];
+
+                const text = document.createElement('div');
+                text.className = 'answer-text';
+                text.textContent = opt;
+
+                btn.appendChild(shape);
+                btn.appendChild(text);
+                btn.onclick = () => selectAnswer(i, q, btn, color);
+
+                container.appendChild(btn);
+            });
+
+            // Start timer
+            questionStartTime = Date.now();
+            startQuestionTimer();
+        }
+
+        function startQuestionTimer() {
+            let timeLeft = timePerQuestion;
+            const timerBar = document.getElementById('timer-bar');
+            timerBar.style.width = '100%';
+            timerBar.style.transition = 'none';
+
+            setTimeout(() => {
+                timerBar.style.transition = `width ${timePerQuestion}s linear`;
+                timerBar.style.width = '0%';
+            }, 50);
+
+            if (timerInterval) clearInterval(timerInterval);
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+
+                if (timeLeft <= 5) {
+                    timerBar.style.backgroundColor = '#e21b3c';
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timeOut();
+                }
+            }, 1000);
+        }
+
+        function selectAnswer(index, q, btn, color) {
+            clearInterval(timerInterval);
+
+            const responseTime = (Date.now() - questionStartTime) / 1000;
+            responseTimes.push(responseTime);
+
+            const isCorrect = index === q.answer;
+
+            // Disable all buttons
+            document.querySelectorAll('.kahoot-answer-btn').forEach(b => {
+                b.disabled = true;
+                b.style.opacity = '0.5';
+            });
+
+            // Highlight selected and correct answers
+            btn.style.opacity = '1';
+            btn.classList.add('selected');
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                btn.style.backgroundColor = '#26890c';
+                correctCount++;
+                streak++;
+                maxStreak = Math.max(maxStreak, streak);
+
+                // Calculate points based on speed
+                const speedBonus = Math.max(0, timePerQuestion - responseTime);
+                const points = Math.round(1000 + (speedBonus * 50));
+                score += points;
+
+                // Show points animation
+                showPointsAnimation(points);
+
+                // Update streak display
+                if (streak >= 2) {
+                    document.getElementById('streak-display').style.display = 'flex';
+                    document.getElementById('streak-count').textContent = streak;
+                }
+            } else {
+                btn.classList.add('incorrect');
+                btn.style.backgroundColor = '#e21b3c';
+                incorrectCount++;
+                streak = 0;
+                document.getElementById('streak-display').style.display = 'none';
+
+                // Show correct answer
+                const correctBtn = document.querySelectorAll('.kahoot-answer-btn')[q.answer];
+                correctBtn.style.opacity = '1';
+                correctBtn.style.backgroundColor = '#26890c';
+                correctBtn.classList.add('correct');
+            }
+
+            document.getElementById('score-value').textContent = score;
+
+            // Move to next question after delay
+            setTimeout(() => {
+                if (engine.nextQuestion()) {
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }, 2000);
+        }
+
+        function timeOut() {
+            incorrectCount++;
+            streak = 0;
+            document.getElementById('streak-display').style.display = 'none';
+
+            // Show correct answer
+            const q = engine.getCurrentQuestion();
+            const buttons = document.querySelectorAll('.kahoot-answer-btn');
+            buttons.forEach((btn, i) => {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+                if (i === q.answer) {
+                    btn.style.opacity = '1';
+                    btn.style.backgroundColor = '#26890c';
+                    btn.classList.add('correct');
+                }
+            });
+
+            // Show timeout message
+            const container = document.getElementById('kahoot-answers');
+            const msg = document.createElement('div');
+            msg.className = 'timeout-message';
+            msg.textContent = '⏰ ¡Tiempo agotado!';
+            container.insertBefore(msg, container.firstChild);
+
+            setTimeout(() => {
+                if (engine.nextQuestion()) {
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }, 2000);
+        }
+
+        function showPointsAnimation(points) {
+            const animation = document.createElement('div');
+            animation.className = 'points-animation';
+            animation.textContent = '+' + points;
+            document.getElementById('game-area').appendChild(animation);
+
+            setTimeout(() => {
+                animation.remove();
+            }, 2000);
+        }
+
+        function showResults() {
+            clearInterval(timerInterval);
+
+            document.getElementById('game-area').style.display = 'none';
+            document.getElementById('results-area').style.display = 'block';
+
+            document.getElementById('final-score').textContent = score.toLocaleString();
+            document.getElementById('correct-count').textContent = correctCount;
+            document.getElementById('incorrect-count').textContent = incorrectCount;
+            document.getElementById('max-streak').textContent = maxStreak;
+
+            const avgTime = responseTimes.length > 0
+                ? (responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length).toFixed(1)
+                : 0;
+            document.getElementById('avg-time').textContent = avgTime + 's';
+
+            // Performance message
+            const percentage = (correctCount / engine.questions.length) * 100;
+            let message = '';
+
+            if (percentage === 100) {
+                message = '🎉 ¡Perfecto! ¡Has acertado todas las preguntas!';
+            } else if (percentage >= 80) {
+                message = '🌟 ¡Excelente trabajo! Muy buen rendimiento.';
+            } else if (percentage >= 60) {
+                message = '👍 ¡Buen trabajo! Sigue practicando.';
+            } else if (percentage >= 40) {
+                message = '💪 No está mal, pero puedes mejorar.';
+            } else {
+                message = '📚 Sigue estudiando, ¡la práctica hace al maestro!';
+            }
+
+            document.getElementById('performance-message').textContent = message;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-const DATA_DIR = '../data/';
+const DATA_DIR = '/data/';
 
 async function fetchCategories() {
   const res = await fetch(DATA_DIR + 'categories.json');
@@ -258,12 +258,24 @@ let resultHTML = `<h2>¡Examen finalizado!</h2>
 
 // Inicializa categorías al cargar
 window.onload = async () => {
-  const categories = await fetchCategories();
-  const select = document.getElementById('category');
-  categories.forEach(cat => {
-    const opt = document.createElement('option');
-    opt.value = cat;
-    opt.textContent = cat;
-    select.appendChild(opt);
-  });
+  try {
+    console.log('Cargando categorías en exam mode...');
+    const categories = await fetchCategories();
+    console.log('Categorías cargadas:', categories);
+    const select = document.getElementById('category');
+    if (!select) {
+      console.error('No se encontró el elemento select#category');
+      return;
+    }
+    categories.forEach(cat => {
+      const opt = document.createElement('option');
+      opt.value = cat;
+      opt.textContent = cat;
+      select.appendChild(opt);
+    });
+    console.log('Categorías agregadas al select');
+  } catch (err) {
+    console.error('Error al cargar categorías:', err);
+    alert('Error al cargar categorías: ' + err.message);
+  }
 };

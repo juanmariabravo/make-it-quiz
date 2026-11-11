@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modo Estudio - Make It Quiz</title>
-  <link rel="stylesheet" href="styles/study-mode.css">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/modes.css">
+  <link rel="stylesheet" href="styles/study-mode.css">
 </head>
 <body>
   <header class="header">
@@ -16,31 +17,120 @@
       <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
     </nav>
   </header>
-  <br>
-  <br>
-  <br>
-  <br>
-  <div class="container">
-    <h1>Modo Estudio</h1>
-    <div id="category-select">
-      <label for="category">Elige una categoría:</label>
-      <select id="category"></select>
-      <button id="load-category">Cargar</button>
+<div class="container" style="margin-top: 100px;">
+  <!-- Category Selection -->
+  <div id="category-select" class="category-selection">
+    <div class="mode-header">
+      <div class="mode-icon">📖</div>
+      <h1>Modo Estudio</h1>
+        <p>Estudia a tu ritmo y comprueba tus respuestas inmediatamente</p>
+        </div>
+        
+        <div class="category-card">
+          <label for="category">Elige una categoría:</label>
+        <select id="category" class="category-dropdown"></select>
+        <button id="load-category" class="btn btn-primary">Comenzar estudio</button>
+        </div>
     </div>
+    
+    <!-- Study Area -->
     <div id="study-area" style="display:none;">
-      <div id="question-box">
-        <div id="question-text"></div>
-        <div id="options"></div>
-        <button id="show-answer" style="display:none;">Mostrar solución</button>
-        <div id="answer-feedback"></div>
-        <button id="next-question" style="display:none;">Siguiente</button>
+      <div class="quiz-header">
+        <a href="#" class="back-link" onclick="location.reload()">← Cambiar categoría</a>
+        <div class="quiz-progress">
+          <span id="category-name"></span>
+          <span>•</span>
+          <span id="progress-text">Pregunta 1 de 10</span>
+        </div>
+        <div class="score-display">
+          <span>✓ <span id="correct-count">0</span></span>
+          <span style="opacity: 0.5;">•</span>
+          <span>✗ <span id="incorrect-count">0</span></span>
+        </div>
       </div>
-      <div id="progress"></div>
-    </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      
+      <div class="question-card">
+        <div class="question-text" id="question-text"></div>
+        <div id="multi-answer-hint" class="multi-answer-hint" style="display:none;">
+          💡 Esta pregunta tiene múltiples respuestas correctas
+        </div>
+        <div class="answers-container" id="answers-container"></div>
+        <div id="answer-feedback" class="answer-feedback"></div>
+      </div>
+      
+      <div class="quiz-controls">
+        <button class="btn btn-secondary" onclick="previousQuestion()" id="prev-btn">← Anterior</button>
+        <button class="btn btn-primary" onclick="nextQuestion()" id="next-btn" style="display:none;">Siguiente →</button>
+        <button class="btn btn-primary" onclick="finishStudy()" id="finish-btn" style="display:none;">Ver resultados</button>
+      </div>
+      </div>
+      
+      <!-- Results -->
+      <div id="results-area" style="display:none;">
+        <div class="results-card">
+          <h2 class="results-title">¡Estudio completado!</h2>
+      
+          <div class="score-circle">
+            <svg width="200" height="200">
+              <circle cx="100" cy="100" r="90" fill="none" stroke="#e0e0e0" stroke-width="10" />
+              <circle id="score-circle" cx="100" cy="100" r="90" fill="none" stroke="#9966ff" stroke-width="10"
+                stroke-dasharray="565.48" stroke-dashoffset="565.48" transform="rotate(-90 100 100)" />
+            </svg>
+            <div class="score-text">
+              <div class="score-percentage" id="final-percentage">0%</div>
+              <div class="score-label">Aciertos</div>
+            </div>
+          </div>
+      
+          <div class="score-breakdown">
+            <div class="score-item correct">
+              <h3 id="final-correct">0</h3>
+              <p>Correctas</p>
+            </div>
+            <div class="score-item incorrect">
+              <h3 id="final-incorrect">0</h3>
+              <p>Incorrectas</p>
+            </div>
+          </div>
+      
+          <div class="cta-buttons">
+            <button class="btn btn-secondary" onclick="location.reload()">Reintentar</button>
+            <button class="btn btn-primary" onclick="window.location.href='index.html'">Volver al inicio</button>
+          </div>
   </div>
-  <script src="scripts/study-mode.js"></script>
-  <script src="scripts/app.js"></script>
-  <script src="scripts/game-modes.js"></script>
-  <script src="scripts/quiz-data.js"></script>
+  </div>
+
+<script src="scripts/study-mode.js"></script>
+<script src="scripts/app.js"></script>
+<script>
+  // Test inmediato
+  console.log('Script inline cargado');
+  console.log('Elemento select:', document.getElementById('category'));
+
+  // Probar carga inmediata
+  fetch('/data/categories.json')
+    .then(res => {
+      console.log('Response status:', res.status);
+      return res.json();
+    })
+    .then(data => {
+      console.log('Datos recibidos:', data);
+      const select = document.getElementById('category');
+      if (select) {
+        data.forEach(cat => {
+          const opt = document.createElement('option');
+          opt.value = cat;
+          opt.textContent = cat;
+          select.appendChild(opt);
+        });
+        console.log('Opciones agregadas al select');
+      }
+    })
+    .catch(err => console.error('Error en fetch:', err));
+</script>
+
 </body>
 </html>

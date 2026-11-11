@@ -2,45 +2,484 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modo Examen - Make It Quiz</title>
-  <link rel="stylesheet" href="styles/exam-mode.css">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/modes.css">
+  <link rel="stylesheet" href="styles/exam-mode.css">
 </head>
 <body>
-<header class="header">
-  <a href="index.html" class="logo">make-it-quiz</a>
-  <nav class="nav">
-    <a href="index.html">Inicio</a>
-    <a href="index.html#modes">Jugar</a>
-    <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
-  </nav>
-</header>
-<br>
-<br>
-<br>
-<br>
-  <div class="container">
-    <h1>Modo Examen</h1>
-    <div id="category-select">
-      <label for="category">Elige una categoría:</label>
-      <select id="category"></select>
-      <button id="load-category">Comenzar examen</button>
-    </div>
+  <header class="header">
+    <a href="index.html" class="logo">make-it-quiz</a>
+    <nav class="nav">
+      <a href="index.html">Inicio</a>
+      <a href="index.html#modes">Jugar</a>
+      <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+    </nav>
+  </header>
+<div class="container" style="margin-top: 100px;">
+  <!-- Category Selection -->
+  <div id="category-select" class="category-selection">
+    <div class="mode-header">
+      <div class="mode-icon">⏰</div>
+      <h1>Modo Examen</h1>
+        <p>Contrarreloj: responde todas las preguntas antes de que acabe el tiempo</p>
+        </div>
+        
+        <div class="category-card">
+          <label for="category">Elige una categoría:</label>
+        <select id="category" class="category-dropdown"></select>
+        
+        <div class="time-selector">
+          <label for="exam-duration">Duración del examen:</label>
+          <select id="exam-duration" class="category-dropdown">
+            <option value="300">5 minutos</option>
+            <option value="600" selected>10 minutos</option>
+            <option value="900">15 minutos</option>
+            <option value="1200">20 minutos</option>
+            <option value="1800">30 minutos</option>
+          </select>
+        </div>
+        <button id="load-category" class="btn btn-primary">Comenzar examen</button>
+        </div>
+        </div>
+        
+        <!-- Exam Area -->
     <div id="exam-area" style="display:none;">
-      <div id="timer" style="text-align:right;font-size:1.2em;margin-bottom:10px;"></div>
-      <div id="question-box">
-        <div id="question-text"></div>
-        <div id="options"></div>
-        <button id="next-question" style="display:none;">Siguiente</button>
+      <div class="quiz-header">
+        <a href="#" class="back-link" onclick="confirmExit()">← Abandonar examen</a>
+        <div class="quiz-progress">
+          <span id="category-name"></span>
+          <span>•</span>
+          <span id="progress-text">Pregunta 1 de 10</span>
+        </div>
+        <div class="timer" id="timer">
+          <span>⏰</span>
+          <span id="time-display">10:00</span>
+        </div>
       </div>
-      <div id="progress"></div>
-    </div>
-    <div id="exam-result" style="display:none;"></div>
+<div class="progress-bar">
+  <div class="progress-fill" id="progress-fill"></div>
+</div>
+
+<div class="question-card">
+  <div class="question-number" id="question-number">Pregunta 1</div>
+  <div class="question-text" id="question-text"></div>
+  <div id="multi-answer-hint" class="multi-answer-hint" style="display:none;">
+    💡 Esta pregunta tiene múltiples respuestas correctas
   </div>
-  <script src="scripts/exam-mode.js"></script>
-  <script src="scripts/app.js"></script>
-  <script src="scripts/game-modes.js"></script>
-  <script src="scripts/quiz-data.js"></script>
+  <div class="answers-container" id="answers-container"></div>
+</div>
+
+<div class="quiz-controls">
+  <button class="btn btn-secondary" onclick="previousQuestion()" id="prev-btn">← Anterior</button>
+  <div class="question-nav">
+    <span id="answered-count">0</span> de <span id="total-questions">0</span> respondidas
+  </div>
+  <button class="btn btn-secondary" onclick="nextQuestion()" id="next-btn">Siguiente →</button>
+  <button class="btn btn-primary" onclick="finishExam()" id="finish-btn">Finalizar examen</button>
+</div>
+</div>
+
+<!-- Results -->
+<div id="results-area" style="display:none;">
+  <div class="results-card">
+    <h2 class="results-title">¡Examen completado!</h2>
+
+    <div class="exam-status" id="exam-status">
+      <div class="status-badge" id="status-badge">APROBADO</div>
+    </div>
+
+    <div class="score-display-large">
+      <div class="score-number" id="final-score">0 / 0</div>
+      <div class="score-percentage" id="final-percentage">0%</div>
+    </div>
+
+    <div class="score-breakdown">
+      <div class="score-item correct">
+        <h3 id="final-correct">0</h3>
+        <p>Correctas</p>
+      </div>
+      <div class="score-item incorrect">
+        <h3 id="final-incorrect">0</h3>
+        <p>Incorrectas</p>
+      </div>
+      <div class="score-item unanswered">
+        <h3 id="final-unanswered">0</h3>
+        <p>Sin responder</p>
+      </div>
+    </div>
+
+    <div class="time-stats">
+      <p><strong>Tiempo utilizado:</strong> <span id="time-used">00:00</span></p>
+      <p><strong>Tiempo total:</strong> <span id="time-total">10:00</span></p>
+    </div>
+
+    <div class="cta-buttons">
+      <button class="btn btn-secondary" onclick="showReview()">Ver revisión</button>
+      <button class="btn btn-secondary" onclick="location.reload()">Reintentar</button>
+      <button class="btn btn-primary" onclick="window.location.href='../index.html#modes'">Cambiar modo</button>
+    </div>
+  </div>
+</div>
+
+<!-- Review -->
+<div id="review-area" style="display:none;">
+  <div class="review-container">
+    <h2>Revisión del examen</h2>
+    <a href="#" class="back-link" onclick="backToResults()">← Volver a resultados</a>
+    <div id="review-content"></div>
+    <div class="cta-buttons">
+      <button class="btn btn-secondary" onclick="location.reload()">Reintentar</button>
+      <button class="btn btn-primary" onclick="window.location.href='../index.html#modes'">Cambiar modo</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script src="scripts/exam-mode.js"></script>
+<script src="scripts/app.js"></script>
+<script>
+  // Test inmediato
+  console.log('Exam mode - Script inline cargado');
+  console.log('Elemento select:', document.getElementById('category'));
+
+  // Probar carga inmediata
+  fetch('/data/categories.json')
+    .then(res => {
+      console.log('Response status:', res.status);
+      return res.json();
+    })
+    .then(data => {
+      console.log('Datos recibidos:', data);
+      const select = document.getElementById('category');
+      if (select) {
+        data.forEach(cat => {
+          const opt = document.createElement('option');
+          opt.value = cat;
+          opt.textContent = cat;
+          select.appendChild(opt);
+        });
+        console.log('Opciones agregadas al select');
+      }
+    })
+    .catch(err => console.error('Error en fetch:', err));
+</script>
+<script>
+  const engine = new QuizEngine();
+  let examDuration = 600;
+  let startTime = 0;
+  let answeredCount = 0;
+
+  // Load categories on page load
+  window.onload = async () => {
+    try {
+      const categories = await engine.loadCategories();
+      const select = document.getElementById('category');
+      categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = cat.replace(/\.(txt|json)$/, '');
+        select.appendChild(opt);
+      });
+    } catch (err) {
+      alert('Error al cargar categorías: ' + err.message);
+    }
+  };
+
+  // Load category and start exam
+  document.getElementById('load-category').onclick = async () => {
+    const filename = document.getElementById('category').value;
+    examDuration = parseInt(document.getElementById('exam-duration').value);
+
+    try {
+      await engine.loadQuestions(filename);
+      if (engine.questions.length === 0) {
+        throw new Error('No se encontraron preguntas en esta categoría.');
+      }
+
+      engine.init('exam', filename, { totalTime: examDuration });
+      document.getElementById('category-select').style.display = 'none';
+      document.getElementById('exam-area').style.display = 'block';
+      document.getElementById('category-name').textContent = filename.replace(/\.(txt|json)$/, '');
+      document.getElementById('total-questions').textContent = engine.questions.length;
+
+      startTime = Date.now();
+      answeredCount = 0;
+
+      startTimer();
+      showQuestion();
+    } catch (err) {
+      alert('Error al cargar preguntas: ' + err.message);
+    }
+  };
+
+  function startTimer() {
+    engine.startTimer(examDuration, (timeLeft) => {
+      updateTimerDisplay(timeLeft);
+    }, () => {
+      alert('¡Tiempo agotado!');
+      finishExam();
+    });
+  }
+
+  function updateTimerDisplay(timeLeft) {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById('time-display').textContent = display;
+
+    // Change color when time is running out
+    const timer = document.getElementById('timer');
+    if (timeLeft <= 60) {
+      timer.style.color = '#e74c3c';
+      timer.style.animation = 'pulse 1s infinite';
+    } else if (timeLeft <= 300) {
+      timer.style.color = '#f39c12';
+    }
+  }
+
+  function showQuestion() {
+    const q = engine.getCurrentQuestion();
+    const isMulti = engine.isMultipleAnswer();
+
+    document.getElementById('question-number').textContent = `Pregunta ${engine.currentQuestionIndex + 1}`;
+    document.getElementById('question-text').textContent = q.question;
+    document.getElementById('multi-answer-hint').style.display = isMulti ? 'block' : 'none';
+
+    // Update progress
+    const progress = ((engine.currentQuestionIndex + 1) / engine.questions.length) * 100;
+    document.getElementById('progress-fill').style.width = progress + '%';
+    document.getElementById('progress-text').textContent =
+      `Pregunta ${engine.currentQuestionIndex + 1} de ${engine.questions.length}`;
+
+    // Render answers
+    const container = document.getElementById('answers-container');
+    container.innerHTML = '';
+
+    if (isMulti) {
+      renderMultipleAnswers(q, container);
+    } else {
+      renderSingleAnswers(q, container);
+    }
+
+    // Update navigation
+    document.getElementById('prev-btn').disabled = engine.currentQuestionIndex === 0;
+    document.getElementById('next-btn').style.display =
+      engine.currentQuestionIndex < engine.questions.length - 1 ? 'inline-flex' : 'none';
+  }
+
+  function renderSingleAnswers(q, container) {
+    const userAnswer = engine.getUserAnswer();
+
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'answer-btn';
+      btn.textContent = opt;
+
+      if (userAnswer === i) {
+        btn.classList.add('selected');
+      }
+
+      btn.onclick = () => {
+        // Check if this question was previously unanswered
+        const wasUnanswered = engine.getUserAnswer() === undefined;
+
+        engine.userAnswers[engine.currentQuestionIndex] = i;
+
+        if (wasUnanswered) {
+          answeredCount++;
+          document.getElementById('answered-count').textContent = answeredCount;
+        }
+
+        // Update UI
+        document.querySelectorAll('.answer-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      };
+
+      container.appendChild(btn);
+    });
+  }
+
+  function renderMultipleAnswers(q, container) {
+    const userAnswer = engine.getUserAnswer() || [];
+
+    q.options.forEach((opt, i) => {
+      const label = document.createElement('label');
+      label.className = 'answer-checkbox';
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = userAnswer.includes(i);
+
+      checkbox.onchange = () => {
+        let currentAnswer = engine.getUserAnswer() || [];
+        const wasUnanswered = currentAnswer.length === 0;
+
+        if (checkbox.checked) {
+          if (!currentAnswer.includes(i)) {
+            currentAnswer.push(i);
+          }
+        } else {
+          currentAnswer = currentAnswer.filter(x => x !== i);
+        }
+
+        engine.userAnswers[engine.currentQuestionIndex] = currentAnswer;
+
+        if (wasUnanswered && currentAnswer.length > 0) {
+          answeredCount++;
+          document.getElementById('answered-count').textContent = answeredCount;
+        } else if (!wasUnanswered && currentAnswer.length === 0) {
+          answeredCount--;
+          document.getElementById('answered-count').textContent = answeredCount;
+        }
+      };
+
+      const span = document.createElement('span');
+      span.textContent = opt;
+
+      label.appendChild(checkbox);
+      label.appendChild(span);
+      container.appendChild(label);
+    });
+  }
+
+  function nextQuestion() {
+    if (engine.nextQuestion()) {
+      showQuestion();
+    }
+  }
+
+  function previousQuestion() {
+    if (engine.previousQuestion()) {
+      showQuestion();
+    }
+  }
+
+  function confirmExit() {
+    if (confirm('¿Estás seguro de que quieres abandonar el examen? Perderás todo el progreso.')) {
+      location.reload();
+    }
+  }
+
+  function finishExam() {
+    if (answeredCount < engine.questions.length) {
+      if (!confirm(`Has respondido ${answeredCount} de ${engine.questions.length} preguntas. ¿Quieres finalizar el examen de todos modos?`)) {
+        return;
+      }
+    }
+
+    engine.stopTimer();
+
+    // Calculate results
+    let correctCount = 0;
+    let incorrectCount = 0;
+    let unansweredCount = 0;
+
+    engine.questions.forEach((q, idx) => {
+      const userAnswer = engine.userAnswers[idx];
+      if (userAnswer === undefined || (Array.isArray(userAnswer) && userAnswer.length === 0)) {
+        unansweredCount++;
+      } else if (engine.checkAnswerAtIndex(idx, userAnswer)) {
+        correctCount++;
+      } else {
+        incorrectCount++;
+      }
+    });
+
+    const percentage = Math.round((correctCount / engine.questions.length) * 100);
+    const timeUsed = Math.floor((Date.now() - startTime) / 1000);
+    const passed = percentage >= 50;
+
+    // Show results
+    document.getElementById('exam-area').style.display = 'none';
+    document.getElementById('results-area').style.display = 'block';
+
+    document.getElementById('final-score').textContent = `${correctCount} / ${engine.questions.length}`;
+    document.getElementById('final-percentage').textContent = percentage + '%';
+    document.getElementById('final-correct').textContent = correctCount;
+    document.getElementById('final-incorrect').textContent = incorrectCount;
+    document.getElementById('final-unanswered').textContent = unansweredCount;
+
+    const statusBadge = document.getElementById('status-badge');
+    statusBadge.textContent = passed ? '✓ APROBADO' : '✗ SUSPENDIDO';
+    statusBadge.className = 'status-badge ' + (passed ? 'passed' : 'failed');
+
+    const minutes = Math.floor(timeUsed / 60);
+    const seconds = timeUsed % 60;
+    document.getElementById('time-used').textContent =
+      `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+    const totalMinutes = Math.floor(examDuration / 60);
+    const totalSeconds = examDuration % 60;
+    document.getElementById('time-total').textContent =
+      `${totalMinutes.toString().padStart(2, '0')}:${totalSeconds.toString().padStart(2, '0')}`;
+  }
+
+  function showReview() {
+    document.getElementById('results-area').style.display = 'none';
+    document.getElementById('review-area').style.display = 'block';
+
+    const reviewContent = document.getElementById('review-content');
+    reviewContent.innerHTML = '';
+
+    engine.questions.forEach((q, idx) => {
+      const userAnswer = engine.userAnswers[idx];
+      const isCorrect = engine.checkAnswerAtIndex(idx, userAnswer);
+      const isUnanswered = userAnswer === undefined || (Array.isArray(userAnswer) && userAnswer.length === 0);
+
+      const questionDiv = document.createElement('div');
+      questionDiv.className = 'review-question';
+
+      let statusClass = isUnanswered ? 'unanswered' : (isCorrect ? 'correct' : 'incorrect');
+      let statusIcon = isUnanswered ? '○' : (isCorrect ? '✓' : '✗');
+
+      let html = `
+                <div class="review-question-header ${statusClass}">
+                  <span class="review-status">${statusIcon}</span>
+                  <span class="review-number">Pregunta ${idx + 1}</span>
+                </div>
+                <div class="review-question-text">${q.question}</div>
+                <div class="review-options">
+              `;
+
+      q.options.forEach((opt, i) => {
+        let optClass = '';
+        if (Array.isArray(q.answer)) {
+          if (q.answer.includes(i)) optClass = 'correct-answer';
+          if (Array.isArray(userAnswer) && userAnswer.includes(i) && !q.answer.includes(i)) {
+            optClass = 'wrong-answer';
+          }
+        } else {
+          if (i === q.answer) optClass = 'correct-answer';
+          if (userAnswer === i && !isCorrect) optClass = 'wrong-answer';
+        }
+
+        html += `<div class="review-option ${optClass}">${opt}</div>`;
+      });
+
+      html += '</div>';
+
+      if (isUnanswered) {
+        html += '<div class="review-feedback unanswered">No respondida</div>';
+      } else if (!isCorrect) {
+        if (Array.isArray(q.answer)) {
+          const correctAnswers = q.answer.map(i => q.options[i]).join(', ');
+          html += `<div class="review-feedback incorrect">Respuestas correctas: ${correctAnswers}</div>`;
+        } else {
+          html += `<div class="review-feedback incorrect">Respuesta correcta: ${q.options[q.answer]}</div>`;
+        }
+      }
+
+      questionDiv.innerHTML = html;
+      reviewContent.appendChild(questionDiv);
+    });
+  }
+
+  function backToResults() {
+    document.getElementById('review-area').style.display = 'none';
+    document.getElementById('results-area').style.display = 'block';
+  }
+</script>
 </body>
 </html>

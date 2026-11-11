@@ -1,0 +1,226 @@
+/* cli-mode.css - Terminal/CLI Mode Styles */
+
+.terminal-window {
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+  background: #323232;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #444;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.terminal-btn:hover {
+  opacity: 0.8;
+}
+
+.terminal-btn.close {
+  background: #ff5f56;
+}
+
+.terminal-btn.minimize {
+  background: #ffbd2e;
+}
+
+.terminal-btn.maximize {
+  background: #27ca3f;
+}
+
+.terminal-title {
+  color: #ddd;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.terminal-body {
+  background: #1e1e1e;
+  padding: 20px;
+  min-height: 500px;
+  max-height: 70vh;
+  overflow-y: auto;
+  color: #00ff00;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 5px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+#terminal-output {
+  margin-bottom: 15px;
+}
+
+.terminal-line {
+  margin: 4px 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.terminal-line.command {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.terminal-line.user-input {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.terminal-line.info {
+  color: #61dafb;
+}
+
+.terminal-line.success {
+  color: #00ff00;
+}
+
+.terminal-line.error {
+  color: #ff6b6b;
+}
+
+.terminal-line.warning {
+  color: #ffc107;
+}
+
+.terminal-line.muted {
+  color: #888;
+}
+
+.terminal-line.separator {
+  color: #555;
+}
+
+.terminal-line.box {
+  color: #9966ff;
+}
+
+.terminal-line.question-number {
+  color: #61dafb;
+  font-weight: bold;
+}
+
+.terminal-line.question {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.05rem;
+}
+
+.terminal-line.option {
+  color: #ddd;
+  padding-left: 10px;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.terminal-prompt {
+  color: #9966ff;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #00ff00;
+  font-family: inherit;
+  font-size: inherit;
+  caret-color: #00ff00;
+}
+
+.terminal-input::selection {
+  background: rgba(0, 255, 0, 0.3);
+}
+
+/* Blinking cursor effect */
+.terminal-input:focus {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Dark mode adjustments */
+.dark .terminal-window {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .terminal-body {
+    font-size: 0.85rem;
+    padding: 15px;
+    min-height: 400px;
+  }
+  
+  .terminal-line.question {
+    font-size: 1rem;
+  }
+}
+
+/* Loading animation for CLI */
+@keyframes dots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60%, 100% { content: '...'; }
+}
+
+.loading::after {
+  content: '';
+  animation: dots 1.5s infinite;
+}
+
+/* Typewriter effect (optional, can be added via JS) */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 0.5s steps(40) forwards;
+}
