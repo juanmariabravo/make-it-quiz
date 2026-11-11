@@ -71,12 +71,18 @@ export default function PlayPage() {
           ))}
         </div>
 
-        <div className="mt-8 text-center">
-          <Link href="/tests" className="mr-4 text-purple-600 hover:text-purple-800 font-medium">
-            Crear o importar test
+        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Link
+            href="/tests"
+            className="inline-flex min-w-48 items-center justify-center rounded-full bg-purple-600 px-6 py-3 font-semibold text-white shadow-sm transition-colors hover:bg-purple-700"
+          >
+            Personalizar tests
           </Link>
-          <Link href="/" className="text-purple-600 hover:text-purple-800 font-medium">
-            ← Volver al inicio
+          <Link
+            href="/"
+            className="inline-flex min-w-48 items-center justify-center rounded-full border border-purple-500/40 px-6 py-3 font-medium text-purple-600 transition-colors hover:bg-purple-500/10"
+          >
+            Volver al inicio
           </Link>
         </div>
       </div>

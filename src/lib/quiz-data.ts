@@ -84,6 +84,16 @@ export function saveCustomQuiz(category: QuizCategory): void {
   )
 }
 
+export function deleteCustomQuiz(id: string): void {
+  const stored = window.localStorage.getItem(CUSTOM_QUIZZES_STORAGE_KEY)
+  if (!stored) return
+  const categories = JSON.parse(stored) as QuizCategory[]
+  window.localStorage.setItem(
+    CUSTOM_QUIZZES_STORAGE_KEY,
+    JSON.stringify(categories.filter((category) => category.id !== id)),
+  )
+}
+
 // Función para parsear preguntas desde formato TXT
 export function parseTxtQuestions(txtContent: string): Question[] {
   const questions: Question[] = []

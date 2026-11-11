@@ -41,6 +41,7 @@ def parse_txt(content: str) -> List[Question]:
 def parse_json(content: str) -> List[Question]:
     try:
         data = json.loads(content)
+        question_data = data if isinstance(data, list) else data.get('questions', [])
         return [
             Question(
                 q['question'],
@@ -48,9 +49,9 @@ def parse_json(content: str) -> List[Question]:
                 q['answer'],
                 q.get('points', 1)
             ).__dict__
-            for q in data.get('questions', [])
+            for q in question_data
         ]
-    except json.JSONDecodeError:
+    except (json.JSONDecodeError, AttributeError, KeyError, TypeError):
         return []
 
 def main():

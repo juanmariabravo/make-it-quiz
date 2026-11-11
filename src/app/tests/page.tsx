@@ -1,14 +1,14 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { ArrowLeft, Download, ExternalLink, Plus, Sparkles, Trash2, Upload } from "lucide-react"
+import { ArrowDownToLine, ArrowLeft, Download, ExternalLink, Plus, Sparkles, Trash2, Upload } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { parseJsonQuestions, parseTxtQuestions, saveCustomQuiz } from "@/lib/quiz-data"
+import { deleteCustomQuiz, loadQuizCategories, parseJsonQuestions, parseTxtQuestions, saveCustomQuiz } from "@/lib/quiz-data"
 import type { Question, QuizCategory } from "@/lib/types"
 
 const emptyQuestion = (): Question => ({
@@ -70,6 +70,21 @@ export default function TestsPage() {
   const [fileName, setFileName] = useState("")
   const [importText, setImportText] = useState("")
   const [message, setMessage] = useState("")
+  const [categories, setCategories] = useState<QuizCategory[]>([])
+  const [editingId, setEditingId] = useState<string | null>(null)
+
+  const refreshCategories = async () => {
+    try {
+      setCategories(await loadQuizCategories())
+    } catch (error) {
+      console.error("Error loading quiz categories:", error)
+      setMessage("No se pudieron cargar los tests. Comprueba que el catálogo de preguntas esté generado.")
+    }
+  }
+
+  useEffect(() => {
+    refreshCategories()
+  }, [])
 
   const updateQuestion = (index: number, update: Partial<Question>) => {
     setQuestions((current) => current.map((question, itemIndex) =>
@@ -101,7 +116,7 @@ export default function TestsPage() {
     }
 
     const category: QuizCategory = {
-      id: `custom-${Date.now()}`,
+      id: editingId || `custom-${Date.now()}`,
       name: cleanName,
       questions: questions.map((question) => ({
         ...question,
@@ -111,9 +126,11 @@ export default function TestsPage() {
       })),
     }
     saveCustomQuiz(category)
+    refreshCategories()
     setMessage("Test guardado. Ya está disponible en todos los modos de juego.")
     setName("")
     setQuestions([emptyQuestion()])
+    setEditingId(null)
   }
 
   const importQuiz = () => {
@@ -129,6 +146,7 @@ export default function TestsPage() {
         questions: parsedQuestions,
       }
       saveCustomQuiz(category)
+      refreshCategories()
       setMessage(`Test importado con ${parsedQuestions.length} preguntas.`)
       setName("")
       setImportText("")
@@ -136,6 +154,33 @@ export default function TestsPage() {
     } catch {
       setMessage("No se pudo importar. Usa la plantilla JSON o el formato TXT indicado.")
     }
+  }
+
+  const editQuiz = (category: QuizCategory) => {
+    const isCustom = category.id.startsWith("custom-") || category.id.startsWith("imported-")
+    const id = isCustom ? category.id : `custom-${Date.now()}`
+    setEditingId(id)
+    setName(category.name)
+    setQuestions(category.questions.map((question) => ({ ...question, options: [...question.options] })))
+    if (!isCustom) {
+      saveCustomQuiz({ ...category, id })
+      refreshCategories()
+      setMessage("Se ha creado una copia editable del test incluido.")
+    }
+    setMode("create")
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  const removeQuiz = (category: QuizCategory) => {
+    const isCustom = category.id.startsWith("custom-") || category.id.startsWith("imported-")
+    if (!isCustom) {
+      setMessage("Los tests incluidos no se pueden eliminar. Puedes crear una copia editable.")
+      return
+    }
+    if (!window.confirm(`¿Eliminar el test «${category.name}»?`)) return
+    deleteCustomQuiz(category.id)
+    refreshCategories()
+    setMessage("Test eliminado.")
   }
 
   const readFile = (file: File) => {
@@ -165,8 +210,18 @@ export default function TestsPage() {
     URL.revokeObjectURL(url)
   }
 
+  const downloadQuiz = (category: QuizCategory) => {
+    const blob = new Blob([JSON.stringify(category, null, 2)], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement("a")
+    link.href = url
+    link.download = `${category.name.toLowerCase().replace(/[^a-z0-9áéíóúñ]+/gi, "-") || "test"}.json`
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
   const chatGptUrl = `https://chatgpt.com/?q=${encodeURIComponent(aiPrompt(importText))}`
-  const geminiUrl = `https://gemini.google.com/app?prompt=${encodeURIComponent(aiPrompt(importText))}`
+  const claudeUrl = `https://claude.ai/new?q=${encodeURIComponent(aiPrompt(importText))}`
 
   return (
     <div className="container mx-auto max-w-4xl px-4 py-10">
@@ -178,13 +233,42 @@ export default function TestsPage() {
         <p className="mt-2 text-muted-foreground">Tus tests se guardan en este navegador y aparecen en todos los modos.</p>
       </div>
 
+      <Card className="mb-6">
+        <CardHeader><CardTitle>Tests existentes</CardTitle></CardHeader>
+        <CardContent className="space-y-3">
+          {categories.length === 0 && <p className="text-sm text-muted-foreground">Cargando tests...</p>}
+          {categories.map((category) => {
+            const isCustom = category.id.startsWith("custom-") || category.id.startsWith("imported-")
+            return (
+              <div key={category.id} className="flex flex-col gap-3 rounded-lg border p-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-medium">{category.name}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {category.questions.length} preguntas · {isCustom ? "Guardado en este navegador" : "Incluido"}
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" onClick={() => downloadQuiz(category)} title="Descargar JSON">
+                    <ArrowDownToLine className="mr-1 h-4 w-4" /> JSON
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={() => editQuiz(category)}>Editar</Button>
+                  <Button variant="outline" size="sm" onClick={() => removeQuiz(category)} disabled={!isCustom}>
+                    <Trash2 className="mr-1 h-4 w-4" /> Eliminar
+                  </Button>
+                </div>
+              </div>
+            )
+          })}
+        </CardContent>
+      </Card>
+
       <div className="mb-6 flex gap-2">
         <Button variant={mode === "create" ? "default" : "outline"} onClick={() => setMode("create")}>Crear test</Button>
         <Button variant={mode === "import" ? "default" : "outline"} onClick={() => setMode("import")}>Importar test</Button>
       </div>
 
       <Card>
-        <CardHeader><CardTitle>{mode === "create" ? "Nuevo test" : "Importar desde archivo"}</CardTitle></CardHeader>
+        <CardHeader><CardTitle>{mode === "create" ? (editingId ? "Editar test" : "Nuevo test") : "Importar desde archivo"}</CardTitle></CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="test-name">Nombre del test {mode === "import" && "(opcional)"}</Label>
@@ -220,7 +304,7 @@ export default function TestsPage() {
                 </div>
               ))}
               <Button variant="outline" onClick={() => setQuestions([...questions, emptyQuestion()])} className="gap-2"><Plus className="h-4 w-4" /> Añadir pregunta</Button>
-              <Button onClick={createQuiz} className="ml-2">Guardar test</Button>
+              <Button onClick={createQuiz} className="ml-2">{editingId ? "Guardar cambios" : "Guardar test"}</Button>
             </div>
           ) : (
             <>
@@ -249,8 +333,8 @@ export default function TestsPage() {
                     </a>
                   </Button>
                   <Button asChild variant="outline" className="gap-2">
-                    <a href={geminiUrl} target="_blank" rel="noopener noreferrer">
-                      Transformar con Gemini <Sparkles className="h-4 w-4" />
+                    <a href={claudeUrl} target="_blank" rel="noopener noreferrer">
+                      Transformar con Claude <Sparkles className="h-4 w-4" />
                     </a>
                   </Button>
                 </div>
